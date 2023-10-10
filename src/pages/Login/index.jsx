@@ -102,7 +102,7 @@ const Ilustracao = styled.img`
 `;
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
@@ -116,12 +116,12 @@ const Login = () => {
       <LoginForm onSubmit={handleSubmit}>
         <Icon src={logo} alt="logo do freeartiks" />
         <InputGroup>
-          <Label htmlFor="username">Email</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             type="text"
             placeholder="joao@email.com"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Label htmlFor="password">Senha</Label>
           <Input
