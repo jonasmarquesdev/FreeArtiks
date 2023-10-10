@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
   #root {
     margin: 0 auto;
     min-width: 393px;
-    max-width: 1400px;
     width: 100%;
   }
 

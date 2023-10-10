@@ -6,9 +6,9 @@ export default function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<PaginaPadrao />}>
+        <Route path="/" element={<PaginaPadrao />}>
         {/* <Route path="/home" element={<Home />} /> */}
-          <Route path="/login" element={<Login />} />
+          <Route index element={<Login />} />
         </Route>
       </Routes>
     </Router>

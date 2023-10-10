@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import logo from "../../assets/logo.svg"
+import logo from "../../assets/logo.svg";
+import ilustracaoLogin from "../../assets/ilustracaoLogin.svg";
+import { Link } from 'react-router-dom';
 
 const LoginPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 92.6vh;
   background-color: #FFFBF3;
 `;
 
 const LoginForm = styled.form`
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,6 +76,31 @@ const InputGroup = styled.div`
   gap: 5px;
 `;
 
+const ParagrafoCadastro = styled.p`
+  margin-top: .5em;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(124, 121, 121, 0.65);
+`;
+
+const LinkEstilizado = styled(Link)`
+  color: #ff882777;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover {
+    color: #FF8927;
+  }
+`;
+
+const Ilustracao = styled.img`
+  z-index: 1;
+  position: absolute;
+  right: 58%;
+  top: 30%;
+`;
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -84,6 +112,7 @@ const Login = () => {
 
   return (
     <LoginPage>
+      <Ilustracao src={ilustracaoLogin} />
       <LoginForm onSubmit={handleSubmit}>
         <Icon src={logo} alt="logo do freeartiks" />
         <InputGroup>
@@ -103,6 +132,10 @@ const Login = () => {
           />
         </InputGroup>
         <Button type="submit">Entrar</Button>
+        <ParagrafoCadastro>
+          Ainda não tem conta?{" "}
+          <LinkEstilizado to="/cadastro">Faça seu cadastro!</LinkEstilizado>
+        </ParagrafoCadastro>
       </LoginForm>
     </LoginPage>
   );
