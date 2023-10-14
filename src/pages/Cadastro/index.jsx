@@ -1,8 +1,19 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from "react";
+import styled from "styled-components";
 import logo from "../../assets/logo.svg";
-import ilustracaoCadastro from "../../assets/ilustracaoCadastro.svg";
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import usePost from "../../usePost";
+import {
+  Icon,
+  IconeDeVoltar,
+  IconeDeVoltarContainer,
+} from "../../components/Icones";
+import IlustracaoComponent from "../../components/Ilustracao";
+import { Button } from "../../components/Botao";
+import { Input, InputGroup, Label } from "../../components/CampoTexto";
+import ilustracaoCadastroEtapa1 from "../../assets/ilustracaoCadastroEtapa1.svg";
+import ilustracaoCadastroEtapa2 from "../../assets/ilustracaoCadastroEtapa2.svg";
+import LinkEstilizado from "../../components/LinkEstilizado";
 
 const CadastroPage = styled.div`
   display: flex;
@@ -10,7 +21,8 @@ const CadastroPage = styled.div`
   align-items: center;
   justify-content: center;
   height: 92.6vh;
-  background-color: #FFFBF3;
+  background-color: var(--cor-de-fundo);
+  transition: all 0.2s;
 `;
 
 const CadastroForm = styled.form`
@@ -20,140 +32,169 @@ const CadastroForm = styled.form`
   justify-content: center;
   gap: 20px;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.60);;
+  background-color: var(--form-fundo);
   height: auto;
   width: 500px;
   padding-bottom: 40px;
   padding-top: 40px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px var(--form-box-shadow);
 `;
 
-const Input = styled.input`
+const ParagrafoCadastro = styled.p`
+  margin-top: 0.5em;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--cinza);
+`;
+
+const Select = styled.select`
   padding: 1em;
   padding-left: 2em;
   margin: 5px 0;
-  border: 1px solid #F2F2F2;
+  border: 1px solid var(--branco-secundario);
   border-radius: 8px;
   width: 300px;
   height: 50px;
 
-  &::placeholder {
-    color: rgba(124, 121, 121, 0.65);
+  &:focus {
+    outline: 2px solid var(--laranja);
   }
 `;
 
-const Button = styled.button`
-  background-color: #FF8927;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  font-size: 1em;
-  font-weight: bold;
-  border-radius: 8px;
-  width: 120px;
-  height: 45;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-
-  &:hover {
-    background-color: #ff882777;
-  }
-`;
-
-const Icon = styled.img`
-  width: 60px;
-  height: 60px;
-`;
-
-const Label = styled.label`
-  margin-bottom: 5px;
-  margin-left: 15px;
-`;
-
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-`;
-
-const ParagrafoCadastro = styled.p`
-  margin-top: .5em;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: rgba(124, 121, 121, 0.65);
-`;
-
-const LinkEstilizado = styled(Link)`
-  color: #ff882777;
-  font-weight: 700;
-  text-decoration: none;
-
-  &:hover {
-    color: #FF8927;
-  }
-`;
-
-const Ilustracao = styled.img`
-  z-index: 1;
-  position: absolute;
-  right: 58%;
-  top: 30%;
-`;
+const Option = styled.option``;
 
 const Cadastro = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [ocupacao, setOcupacao] = useState('');
+  const [etapaAtiva, setEtapaAtiva] = useState(0);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [nomeInstituicao, setNomeInstituicao] = useState("");
+  const [nivelAcademico, setNivelAcademico] = useState("");
+  const [ocupacao, setOcupacao] = useState("");
+
+  // eslint-disable-next-line no-unused-vars
+  const { cadastrarDados, erro, sucesso } = usePost();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica de autenticação
+    // lógica de cadastro
+
+    const usuario = {
+      nome: nome,
+      email: email,
+      senha: senha,
+      ocupacao: ocupacao,
+    };
+
+    if (etapaAtiva !== 0) {
+      try {
+        cadastrarDados({ url: "usuario", dados: usuario });
+        navigate("/login");
+      } catch (erro) {
+        erro && alert("Erro ao cadastrar os dados");
+      }
+    }
   };
+
+  function voltaEtapa() {
+    setEtapaAtiva(etapaAtiva - 1);
+  }
+
+  function AvancarEtapa() {
+    setEtapaAtiva(etapaAtiva + 1);
+  }
 
   return (
     <CadastroPage>
-      <Ilustracao src={ilustracaoCadastro} />
-      <CadastroForm onSubmit={handleSubmit}>
-        <Icon src={logo} alt="logo do freeartiks" />
-        <InputGroup>
-          <Label htmlFor="username">Nome</Label>
-          <Input
-            type="text"
-            placeholder="joao ribeiro"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Label htmlFor="email">Email</Label>
-          <Input
-            type="text"
-            placeholder="joao@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Label htmlFor="password">Senha</Label>
-          <Input
-            type="password"
-            placeholder="1234"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Label htmlFor="ocupacao">Ocupação</Label>
-          <Input
-            type="ocupacao"
-            placeholder="aluno"
-            value={ocupacao}
-            onChange={(e) => setOcupacao(e.target.value)}
-          />
-        </InputGroup>
-        <Button type="submit">Avançar</Button>
-        <ParagrafoCadastro>
-          Já tem uma conta?{" "}
-          <LinkEstilizado to="/">Faça login!</LinkEstilizado>
-        </ParagrafoCadastro>
-      </CadastroForm>
+      {etapaAtiva === 0 ? (
+        <>
+          <IlustracaoComponent src={ilustracaoCadastroEtapa1} />
+          <CadastroForm onSubmit={handleSubmit}>
+            <Icon src={logo} alt="logo do freeartiks" />
+            <InputGroup>
+              <Label htmlFor="nome">Nome</Label>
+              <Input
+                type="text"
+                placeholder="joao ribeiro"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="text"
+                placeholder="joao@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                type="password"
+                placeholder="1234"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+              />
+              <Label htmlFor="ocupacao">Ocupação</Label>
+              <Select
+                value={ocupacao}
+                onChange={(e) => setOcupacao(e.target.value)}
+              >
+                <Option value="">Selecione o tipo de usuário</Option>
+                <Option value="estudante">Estudante</Option>
+                <Option value="professor">Professor</Option>
+              </Select>
+            </InputGroup>
+            {ocupacao !== "professor" ? (
+              <Button type="submit">Cadastrar</Button>
+            ) : (
+              <Button onClick={AvancarEtapa}>Avançar</Button>
+            )}
+            <ParagrafoCadastro>
+              Já tem uma conta?{" "}
+              <LinkEstilizado to="/auth/login">Faça login!</LinkEstilizado>
+            </ParagrafoCadastro>
+          </CadastroForm>
+        </>
+      ) : (
+        <>
+          <IlustracaoComponent src={ilustracaoCadastroEtapa2} />
+          <CadastroForm onSubmit={handleSubmit}>
+            <IconeDeVoltarContainer onClick={voltaEtapa}>
+              <IconeDeVoltar />
+              <span>Voltar</span>
+            </IconeDeVoltarContainer>
+            <Icon src={logo} alt="logo do freeartiks" />
+            <InputGroup>
+              <Label htmlFor="nome">Nome da Instituição</Label>
+              <Input
+                type="text"
+                placeholder="Centro Universitário"
+                value={nomeInstituicao}
+                onChange={(e) => setNomeInstituicao(e.target.value)}
+              />
+              <Label htmlFor="nivelAcademico">Nível acadêmico</Label>
+              <Select
+                value={nivelAcademico}
+                onChange={(e) => setNivelAcademico(e.target.value)}
+              >
+                <Option value="">Selecione o nível acadêmico</Option>
+                <Option value="superior">Ensino superior</Option>
+                <Option value="bacharelado">Bacharelado</Option>
+                <Option value="mestrado">Mestrado</Option>
+                <Option value="doutorado">Doutorado</Option>
+              </Select>
+            </InputGroup>
+            <Button type="submit">Cadastrar</Button>
+            <ParagrafoCadastro>
+              Já tem uma conta?{" "}
+              <LinkEstilizado to="/">Faça login!</LinkEstilizado>
+            </ParagrafoCadastro>
+          </CadastroForm>
+        </>
+      )}
     </CadastroPage>
   );
 };

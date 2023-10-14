@@ -1,8 +1,14 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import logo from "../../assets/logo.svg";
+import { useState } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import ilustracaoLogin from "../../assets/ilustracaoLogin.svg";
-import { Link } from 'react-router-dom';
+import IlustracaoComponent from "../../components/Ilustracao";
+import { Input, InputGroup, Label } from "../../components/CampoTexto";
+import { Icon } from "../../components/Icones";
+import logo from "../../assets/logo.svg";
+import { Button } from "../../components/Botao";
+import LinkEstilizado from "../../components/LinkEstilizado";
+import { useUser } from "../../context/UserContext";
 
 const LoginPage = styled.div`
   display: flex;
@@ -10,7 +16,7 @@ const LoginPage = styled.div`
   align-items: center;
   justify-content: center;
   height: 92.6vh;
-  background-color: #FFFBF3;
+  background-color: var(--cor-de-fundo);
 `;
 
 const LoginForm = styled.form`
@@ -20,99 +26,52 @@ const LoginForm = styled.form`
   justify-content: center;
   gap: 20px;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.60);;
+  background-color: var(--form-fundo);
   height: 500px;
   width: 500px;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-`;
-
-const Input = styled.input`
-  padding: 1em;
-  padding-left: 2em;
-  margin: 5px 0;
-  border: 1px solid #F2F2F2;
-  border-radius: 8px;
-  width: 300px;
-  height: 50px;
-
-  &::placeholder {
-    color: rgba(124, 121, 121, 0.65);
-  }
-`;
-
-const Button = styled.button`
-  background-color: #FF8927;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  font-size: 1em;
-  font-weight: bold;
-  border-radius: 8px;
-  width: 120px;
-  height: 45;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-
-  &:hover {
-    background-color: #ff882777;
-  }
-`;
-
-const Icon = styled.img`
-  width: 60px;
-  height: 60px;
-`;
-
-const Label = styled.label`
-  margin-bottom: 5px;
-  margin-left: 15px;
-`;
-
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  box-shadow: 0 0 10px var(--form-box-shadow);
 `;
 
 const ParagrafoCadastro = styled.p`
-  margin-top: .5em;
+  margin-top: 0.5em;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: rgba(124, 121, 121, 0.65);
-`;
-
-const LinkEstilizado = styled(Link)`
-  color: #ff882777;
-  font-weight: 700;
-  text-decoration: none;
-
-  &:hover {
-    color: #FF8927;
-  }
-`;
-
-const Ilustracao = styled.img`
-  z-index: 1;
-  position: absolute;
-  right: 58%;
-  top: 30%;
+  color: var(--cinza);
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const { user, Login } = useUser();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aqui você pode adicionar a lógica de autenticação
+
+    const usuarioFornecido = {
+      email: email,
+      senha: senha,
+    };
+
+    if (
+      usuarioFornecido.email === user.email &&
+      usuarioFornecido.senha === user.senha
+    ) {
+      Login();
+      navigate("/");
+    } else {
+      alert("Dados incorretos!");
+    }
   };
 
   return (
     <LoginPage>
-      <Ilustracao src={ilustracaoLogin} />
+      <IlustracaoComponent src={ilustracaoLogin} />
       <LoginForm onSubmit={handleSubmit}>
         <Icon src={logo} alt="logo do freeartiks" />
         <InputGroup>
@@ -127,14 +86,16 @@ const Login = () => {
           <Input
             type="password"
             placeholder="1234"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
         </InputGroup>
         <Button type="submit">Entrar</Button>
         <ParagrafoCadastro>
           Ainda não tem conta?{" "}
-          <LinkEstilizado to="/cadastro">Faça seu cadastro!</LinkEstilizado>
+          <LinkEstilizado to="/auth/register">
+            Faça seu cadastro!
+          </LinkEstilizado>
         </ParagrafoCadastro>
       </LoginForm>
     </LoginPage>
