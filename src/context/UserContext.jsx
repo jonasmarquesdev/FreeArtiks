@@ -38,7 +38,7 @@ export function UserProvider({ children }) {
     setUserEncontrado(null);
   }
 
-  function Login(emailFornecido) {
+  function Login(emailFornecido, senhaFornecida) {
     const encontraUser = usuarioCadastrado.find(
       (user) => user.email === emailFornecido
     );
@@ -46,8 +46,12 @@ export function UserProvider({ children }) {
     if (!encontraUser) {
       alert("Dados incorretos");
     }
-    setUserEncontrado(encontraUser);
-    setIsLoggedIn(true);
+    if (senhaFornecida === encontraUser.senha) {
+      setUserEncontrado(encontraUser);
+      setIsLoggedIn(true);
+    } else {
+      alert("Dados incorretos");
+    }
   }
 
   return (

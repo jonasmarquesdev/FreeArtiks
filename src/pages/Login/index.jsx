@@ -45,7 +45,7 @@ const ParagrafoCadastro = styled.p`
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { user, Login } = useUser();
+  const { user, Login, isLoggedIn } = useUser();
 
   const navigate = useNavigate();
 
@@ -58,8 +58,9 @@ const Login = () => {
 
     if (!usuarioFornecidoEmail && !usuarioFornecidoSenha) {
       alert("Dados incorretos!");
-    } else {
-      Login(email);
+    }
+    Login(email, senha);
+    if (isLoggedIn) {
       navigate("/");
     }
   };

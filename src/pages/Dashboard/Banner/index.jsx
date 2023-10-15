@@ -5,6 +5,7 @@ import { Button } from "../../../components/Botao";
 import blob from "../../../assets/blob.svg";
 import ilustracao from "../../../assets/ilustracaoBanner.svg";
 import { useUser } from "../../../context/UserContext";
+import { useEffect, useState } from "react";
 
 const BannerContainer = styled.div`
   height: 500px;
@@ -60,11 +61,15 @@ const Ilustracao = styled.img``;
 
 const Banner = () => {
   const { userEncontrado } = useUser();
-  let userNomeSplice = "";
-
-  if (userEncontrado && userEncontrado.nome) {
-    userNomeSplice = userEncontrado.nome.split(" ")[0];
-  }
+  const [userNomeSplice, setUserNomeSplice] = useState("");
+  
+  useEffect(() => {
+    if (userEncontrado && userEncontrado.nome) {
+      setUserNomeSplice(userEncontrado.nome.split(" ")[0]);
+    } else {
+      setUserNomeSplice("Visitante")
+    }
+  }, [userEncontrado]);
 
   return (
     <BannerContainer>
@@ -72,10 +77,7 @@ const Banner = () => {
       <Words>
         <TitleComNome>
           Olá,{" "}
-          {userEncontrado && userEncontrado.nome 
-          ? userNomeSplice 
-          : "Visitante"}
-          !
+          {userNomeSplice}!
         </TitleComNome>
         <Title>Com o FreeArtiks você pode!</Title>
         <TitleMargin>
