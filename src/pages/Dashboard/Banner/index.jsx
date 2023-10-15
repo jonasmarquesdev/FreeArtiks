@@ -4,6 +4,7 @@ import { Button } from "../../../components/Botao";
 // assets
 import blob from "../../../assets/blob.svg";
 import ilustracao from "../../../assets/ilustracaoBanner.svg";
+import mascote from "../../../assets/mascote.png";
 import { useUser } from "../../../context/UserContext";
 import { useEffect, useState } from "react";
 
@@ -14,7 +15,7 @@ const BannerContainer = styled.div`
   overflow: hidden;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px 400px 0px;
   border-radius: 30px;
 `;
 
@@ -57,11 +58,44 @@ const ButtonBanner = styled(Button)`
   align-self: center;
 `;
 
+const MascoteContainer = styled.div`
+  position: fixed;
+`;
+
+const Mascote = styled.img`
+  z-index: 3;
+  position: fixed;
+  width: 10%;
+  left: 0%;
+  transition: all 0.2s;
+  bottom: -6%;
+
+  &:hover {
+    bottom: -2%;
+  }
+`;
+
+const Balloon = styled.div`
+  z-index: 2;
+  position: fixed;
+  display: ${(props) => (props.showBalloonProp ? "block" : "none")};
+  left: 7%;
+  bottom: 15%;
+  width: 200px;
+  height: 115px;
+  background-color: var(--laranja);
+  color: var(--branco-default);
+  padding: 1em;
+  text-align: center;
+  border-radius: 20px 20px 20px 0px;
+`;
+
 const Ilustracao = styled.img``;
 
 const Banner = () => {
   const { userEncontrado } = useUser();
   const [userNomeSplice, setUserNomeSplice] = useState("");
+  const [showBalloonProp, setShowBalloonProp] = useState(false);
   
   useEffect(() => {
     if (userEncontrado && userEncontrado.nome) {
@@ -70,6 +104,10 @@ const Banner = () => {
       setUserNomeSplice("Visitante")
     }
   }, [userEncontrado]);
+
+  const ShowBalloon = () => {
+    setShowBalloonProp(!showBalloonProp)
+  }
 
   return (
     <BannerContainer>
@@ -83,6 +121,10 @@ const Banner = () => {
         <TitleMargin>
           Explore o Conhecimento: Artigos e Livros à Distância de um Clique!
         </TitleMargin>
+        <MascoteContainer>
+          <Mascote src={mascote} onMouseEnter={ShowBalloon} onMouseLeave={ShowBalloon} />
+          <Balloon showBalloonProp={showBalloonProp}>"A boa educação é moeda de ouro. Em toda a parte tem valor." — Pe. António Vieira</Balloon>
+        </MascoteContainer>
         <ButtonBanner>Explorar</ButtonBanner>
       </Words>
       <Ilustracao src={ilustracao} />

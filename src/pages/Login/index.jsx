@@ -5,7 +5,7 @@ import ilustracaoLogin from "../../assets/ilustracaoLogin.svg";
 import IlustracaoComponent from "../../components/Ilustracao";
 import { Input, InputGroup, Label } from "../../components/CampoTexto";
 import { Icon } from "../../components/Icones";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo1.png";
 import { Button } from "../../components/Botao";
 import LinkEstilizado from "../../components/LinkEstilizado";
 import { useUser } from "../../context/UserContext";
@@ -45,24 +45,15 @@ const ParagrafoCadastro = styled.p`
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { user, Login, isLoggedIn } = useUser();
+  const { Login, isLoggedIn } = useUser();
 
   const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica de autenticação
-
-    const usuarioFornecidoEmail = user.find((user) => user.email === email);
-    const usuarioFornecidoSenha = user.find((user) => user.senha === senha);
-
-    if (!usuarioFornecidoEmail && !usuarioFornecidoSenha) {
-      alert("Dados incorretos!");
-    }
+    
     Login(email, senha);
-    if (isLoggedIn) {
-      navigate("/");
-    }
+    await isLoggedIn === true ? navigate("/") : "";
   };
 
   return (
