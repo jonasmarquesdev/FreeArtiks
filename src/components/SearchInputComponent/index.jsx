@@ -8,7 +8,9 @@ const SearchContainer = styled('div')({
   border: '1px solid #ccc',
   borderRadius: '8px',
   padding: '4px',
-  backgroundColor: 'var(--branco-default)'
+  backgroundColor: 'var(--branco-default)',
+  marginRight: '1em',
+  position: 'absolute',
 });
 
 const SearchInput = styled(TextField)({

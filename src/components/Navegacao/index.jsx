@@ -5,7 +5,7 @@ import SearchInputComponent from "../SearchInputComponent";
 
 // assets
 import MenuIcon from "@mui/icons-material/Menu";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/brand-raw.png";
 import { useUser } from "../../context/UserContext";
 import DropdownMenu from "../DropdownMenu";
 
@@ -14,7 +14,7 @@ const NavegacaoContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 30px;
+  gap: 20%;
   width: 100%;
 `;
 
@@ -26,6 +26,7 @@ const ButtonGroup = styled.div`
 
 const MenuGroup = styled(ButtonGroup)`
   gap: 20px;
+  max-width: 400px;
 `;
 
 const ButtonCadastrar = styled(Button)`
@@ -40,7 +41,7 @@ const ButtonLogin = styled(Button)`
 `;
 
 const Logo = styled.img`
-  width: 60%;
+  width: 55%;
 `;
 
 const Navegacao = () => {
