@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const UserContext = createContext();
 
@@ -33,6 +33,23 @@ export function UserProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEncontrado, setUserEncontrado] = useState(null);
 
+  useEffect(() => {
+    // Verifica o localStorage para definir o estado de isLoggedIn e userEncontrado
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+    const storedUserEncontrado = localStorage.getItem("userEncontrado");
+
+    if (storedIsLoggedIn === "true" && storedUserEncontrado) {
+      setIsLoggedIn(true);
+      setUserEncontrado(JSON.parse(storedUserEncontrado));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Salva o estado no localStorage sempre que isLoggedIn ou userEncontrado mudam
+    localStorage.setItem("isLoggedIn", isLoggedIn ? "true" : "false");
+    localStorage.setItem("userEncontrado", JSON.stringify(userEncontrado));
+  }, [isLoggedIn, userEncontrado]);
+
   function Logout() {
     setIsLoggedIn(false);
     setUserEncontrado(null);
@@ -44,19 +61,28 @@ export function UserProvider({ children }) {
     );
 
     if (!encontraUser) {
-      alert("Dados incorretos");
-    }
-    if (senhaFornecida === encontraUser.senha) {
+      alert("Dados incorretos: Email");
+    } else if (encontraUser) {
+      if (senhaFornecida !== encontraUser.senha) {
+        alert("Dados incorretos: Senha");
+      }
       setUserEncontrado(encontraUser);
       setIsLoggedIn(true);
-    } else {
-      alert("Dados incorretos");
+      
     }
   }
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, isLoggedIn, setIsLoggedIn, Logout, Login, userEncontrado }}
+      value={{
+        user,
+        setUser,
+        isLoggedIn,
+        setIsLoggedIn,
+        Logout,
+        Login,
+        userEncontrado,
+      }}
     >
       {children}
     </UserContext.Provider>

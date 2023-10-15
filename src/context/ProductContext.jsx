@@ -26,14 +26,14 @@ export function LivroProvider({ children }) {
       titulo: "Projeto de Banco de Dados: Volume 4",
       image: "",
       autor: "Carlos Alberto Heuser",
-      categoria: "Essencial",
+      categoria: "Importante",
     },
     {
       id: 4,
       titulo: "Banco De Dados - Projetos E Implementação",
       image: "",
       autor: "FELIPE NERY RODRIGUES MACHADO",
-      categoria: "Essencial",
+      categoria: "Importante",
     },
   ];
 
