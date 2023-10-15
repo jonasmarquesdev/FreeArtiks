@@ -53,19 +53,14 @@ const Login = () => {
     e.preventDefault();
     // Aqui você pode adicionar a lógica de autenticação
 
-    const usuarioFornecido = {
-      email: email,
-      senha: senha,
-    };
+    const usuarioFornecidoEmail = user.find((user) => user.email === email);
+    const usuarioFornecidoSenha = user.find((user) => user.senha === senha);
 
-    if (
-      usuarioFornecido.email === user.email &&
-      usuarioFornecido.senha === user.senha
-    ) {
-      Login();
-      navigate("/");
-    } else {
+    if (!usuarioFornecidoEmail && !usuarioFornecidoSenha) {
       alert("Dados incorretos!");
+    } else {
+      Login(email);
+      navigate("/");
     }
   };
 
@@ -81,6 +76,7 @@ const Login = () => {
             placeholder="joao@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <Label htmlFor="password">Senha</Label>
           <Input
@@ -88,6 +84,7 @@ const Login = () => {
             placeholder="1234"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
+            required
           />
         </InputGroup>
         <Button type="submit">Entrar</Button>

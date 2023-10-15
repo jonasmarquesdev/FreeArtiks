@@ -45,7 +45,7 @@ const Logo = styled.img`
 
 const Navegacao = () => {
   const navigate = useNavigate();
-  const { user, isLoggedIn } = useUser();
+  const { userEncontrado, isLoggedIn } = useUser();
 
   return (
     <>
@@ -67,13 +67,9 @@ const Navegacao = () => {
             </>
           ) : (
             <>
-              {/* <AvatarMenu 
-                src={user.image}
-                nome={user.nome}
-              /> */}
               <DropdownMenu
-                nome={user.nome}
-                src={user.image}
+                nome={userEncontrado.nome}
+                src={userEncontrado.image}
               />
             </>
           )}

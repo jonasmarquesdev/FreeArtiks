@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Button } from "../../../components/Botao";
+
 // assets
 import blob from "../../../assets/blob.svg";
 import ilustracao from "../../../assets/ilustracaoBanner.svg";
+import { useUser } from "../../../context/UserContext";
 
 const BannerContainer = styled.div`
   height: 500px;
@@ -32,7 +34,14 @@ const Title = styled.h2`
 
 const TitleMargin = styled(Title)`
   margin-left: 1em;
-  margin-top: .5em;
+  margin-top: 0.5em;
+`;
+
+const TitleComNome = styled(TitleMargin)`
+  position: absolute;
+  margin-left: -2em;
+  margin-top: -2em;
+  color: var(--cor-de-fundo);
 `;
 
 const Blob = styled.img`
@@ -50,10 +59,24 @@ const ButtonBanner = styled(Button)`
 const Ilustracao = styled.img``;
 
 const Banner = () => {
+  const { userEncontrado } = useUser();
+  let userNomeSplice = "";
+
+  if (userEncontrado && userEncontrado.nome) {
+    userNomeSplice = userEncontrado.nome.split(" ")[0];
+  }
+
   return (
     <BannerContainer>
       <Blob src={blob} />
       <Words>
+        <TitleComNome>
+          Olá,{" "}
+          {userEncontrado && userEncontrado.nome 
+          ? userNomeSplice 
+          : "Visitante"}
+          !
+        </TitleComNome>
         <Title>Com o FreeArtiks você pode!</Title>
         <TitleMargin>
           Explore o Conhecimento: Artigos e Livros à Distância de um Clique!

@@ -3,8 +3,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import Avatar from "@mui/material/Avatar";
 import { useUser } from "../../context/UserContext";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Wrapper = styled.div`
   display: flex;
@@ -78,11 +78,11 @@ function DropdownMenu({ nome, src }) {
         <Name onClick={toggleDropdown}>{nome}</Name>
         <StyledAvatar onClick={toggleDropdown} alt={nome} src={src} />
       </Wrapper>
-      <Dropdown isOpen={isOpen}>
+      <Dropdown isOpen={isOpen} onMouseLeave={toggleDropdown}>
         <DropdownList>
           <DropdownItem>
             <AccountCircleIcon />
-            <DropdownLink href="#">Perfil</DropdownLink>
+            <DropdownLink>Perfil</DropdownLink>
           </DropdownItem>
           <DropdownItem>
             <LogoutIcon />
