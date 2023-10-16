@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import styled from "styled-components";
 import { Button } from "../../../components/Botao";
 
@@ -15,7 +16,7 @@ const BannerContainer = styled.div`
   overflow: hidden;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 20px 0px 400px 0px;
+  margin: 20px 0px 20px 0px;
   border-radius: 30px;
 `;
 

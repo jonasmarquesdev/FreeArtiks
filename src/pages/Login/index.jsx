@@ -15,7 +15,7 @@ const LoginPage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 92.6vh;
+  height: 100vh;
   background-color: var(--cor-de-fundo);
 `;
 
@@ -30,6 +30,7 @@ const LoginForm = styled.form`
   height: 500px;
   width: 500px;
   padding: 20px;
+  margin-bottom: 50px;
   border-radius: 8px;
   box-shadow: 0 0 10px var(--form-box-shadow);
 `;
@@ -48,12 +49,12 @@ const Login = () => {
   const { Login, isLoggedIn } = useUser();
 
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     Login(email, senha);
-    await isLoggedIn === true ? navigate("/") : "";
+    (await isLoggedIn) === true ? navigate("/") : "";
   };
 
   return (

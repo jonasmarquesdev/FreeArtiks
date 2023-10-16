@@ -10,6 +10,8 @@ const LayoutContainer = styled.div`
 `;
 
 const Footer = styled.footer`
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 75px;
   background-color: #FF8927;

@@ -1,12 +1,14 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Navegacao from "../../components/Navegacao";
+import { ArtigoProvider, LivroProvider } from "../../context/ProductContext";
 
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-width: 1250px;
   background-color: var(--cor-de-fundo);
 `;
 
@@ -26,11 +28,17 @@ const FooterText = styled.p`
 function PaginaPadrao() {
   return (
     <LayoutContainer>
-      <Navegacao />
-      <Outlet />
-      <Footer>
-        <FooterText>© 2023 FreeArtiks. Todos os direitos reservados.</FooterText>
-      </Footer>
+      <LivroProvider>
+        <ArtigoProvider>
+          <Navegacao />
+          <Outlet />
+          <Footer>
+            <FooterText>
+              © 2023 FreeArtiks. Todos os direitos reservados.
+            </FooterText>
+          </Footer>
+        </ArtigoProvider>
+      </LivroProvider>
     </LayoutContainer>
   );
 }

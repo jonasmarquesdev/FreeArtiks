@@ -20,7 +20,7 @@ const CadastroPage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 92.6vh;
+  height: 100vh;
   background-color: var(--cor-de-fundo);
   transition: all 0.2s;
 `;
@@ -37,6 +37,7 @@ const CadastroForm = styled.form`
   width: 500px;
   padding-bottom: 40px;
   padding-top: 40px;
+  margin-bottom: 50px;
   border-radius: 8px;
   box-shadow: 0 0 10px var(--form-box-shadow);
 `;
@@ -190,7 +191,7 @@ const Cadastro = () => {
             <Button type="submit">Cadastrar</Button>
             <ParagrafoCadastro>
               Já tem uma conta?{" "}
-              <LinkEstilizado to="/">Faça login!</LinkEstilizado>
+              <LinkEstilizado to="/auth/login">Faça login!</LinkEstilizado>
             </ParagrafoCadastro>
           </CadastroForm>
         </>
