@@ -14,7 +14,7 @@ const NavegacaoContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 20%;
+  gap: 40%;
   width: 100%;
 `;
 
@@ -42,6 +42,7 @@ const ButtonLogin = styled(Button)`
 
 const Logo = styled.img`
   width: 55%;
+  cursor: pointer;
 `;
 
 const Navegacao = () => {
@@ -53,7 +54,7 @@ const Navegacao = () => {
       <NavegacaoContainer>
         <MenuGroup>
           <MenuIcon sx={{ fontSize: 50, color: "var(--preto)" }} />
-          <Logo src={logo} />
+          <Logo src={logo} onClick={() => navigate("/")} />
         </MenuGroup>
         <SearchInputComponent />
         <ButtonGroup>
