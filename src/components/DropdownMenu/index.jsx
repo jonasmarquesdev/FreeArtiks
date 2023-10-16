@@ -42,7 +42,7 @@ const UserWrapper = styled.div`
 `;
 
 const Dropdown = styled.div`
-  /* display: ${(props) => (props.isOpen ? "block" : "none")}; */
+  display: ${(props) => (props.isOpen ? "block" : "none")};
   position: absolute;
   top: 100%;
   right: -20px;
@@ -98,7 +98,7 @@ function DropdownMenu({ nome, src }) {
   const { Logout, userEncontrado } = useUser();
 
   const navigate = useNavigate();
-
+  
   const NavigateToProfile = () => {
     navigate("/dashboard/user/profile");
   };
@@ -120,8 +120,8 @@ function DropdownMenu({ nome, src }) {
             <Box
               sx={{ marginLeft: '5px' }}
             >
-              <NameDropMenu onClick={toggleDropdown}>{nome}</NameDropMenu>
-              <NameDropMenu onClick={toggleDropdown}>{userEncontrado.email}</NameDropMenu>
+              <NameDropMenu>{nome}</NameDropMenu>
+              <NameDropMenu>{userEncontrado.email}</NameDropMenu>
             </Box>
           </ProfileInfo>
         </DropdownList>
