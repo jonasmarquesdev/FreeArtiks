@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { image1, image2, image3, image4, image5, image6 } from "./assets";
 
 const UserContext = createContext();
 
@@ -22,8 +23,38 @@ export function UserProvider({ children }) {
         {
           id: 1,
           titulo: "Sistema de Banco de Dados",
-          autor: "Abraham Silberschatz, Henry F. Korth e S. Sudarshan",
-          categoria: "Introdutório",
+        },
+        {
+          id: 2,
+          titulo: "Projeto de Banco de Dados: Volume 4",
+        },
+      ],
+      recomendado: [
+        {
+          id: 1,
+          titulo: "Projeto de Banco de Dados: Volume 4",
+        },
+      ],
+    },
+    {
+      nome: "Ana Beatriz de Oliveira Santos",
+      email: "anna@gmail.com",
+      senha: "123",
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/storage-1cbb2.appspot.com/o/pexels-mert-coşkun-17871654.jpg?alt=media&token=a5dca7e4-41d6-4bdb-84ee-9247dc02a818&_gl=1*1njo4nu*_ga*NzMyNjc1Nzg3LjE2OTAxNjYxNDA.*_ga_CW55HF8NVT*MTY5NzQ1NzEyOS42LjEuMTY5NzQ1NzE2Ny4yMi4wLjA.",
+      sobre:
+        "Ana Beatriz, uma estudante dedicada de tecnologia que se transformou em uma engenheira de software excepcional, trilhou seu caminho desde sua infância curiosa e apaixonada por tecnologia até a graduação em Engenharia de Software. Durante seus anos de faculdade, Ana se destacou como uma aluna dedicada e inovadora, adquirindo habilidades sólidas em desenvolvimento de software, resolução de problemas e pensamento criativo. Após sua formatura, Ana continuou a brilhar na indústria de tecnologia, contribuindo para projetos de grande escala e tornando-se uma referência em sua área de atuação.",
+      nomeinstituicao: "Centro Universitário Unibra",
+      nivelacademico: "Graduada",
+      ocupacao: "Estudante",
+      lendo: [
+        {
+          id: 1,
+          titulo: "Sistema de Banco de Dados",
+        },
+        {
+          id: 2,
+          titulo: "Projeto de Banco de Dados: Volume 4",
         },
       ],
     },
@@ -68,7 +99,6 @@ export function UserProvider({ children }) {
       }
       setUserEncontrado(encontraUser);
       setIsLoggedIn(true);
-      
     }
   }
 

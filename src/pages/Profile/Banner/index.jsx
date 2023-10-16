@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import styled from "styled-components";
 import { Button } from "../../../components/Botao";
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Avatar, Box } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 
 const BannerContainer = styled.div`
   height: 500px;
@@ -83,7 +85,8 @@ const Ilustracao = styled.img`
 `;
 
 const Profile = () => {
-  const { userEncontrado } = useUser();
+  const { userEncontrado, Logout } = useUser();
+  const navigate = useNavigate();
 
   // Credentials
   const [foto, setFoto] = useState(null);
@@ -101,8 +104,15 @@ const Profile = () => {
       setEmail(userEncontrado.email);
       setNomeInstituicao(userEncontrado.nomeinstituicao);
       setSobre(userEncontrado.sobre);
+    } else {
+      navigate("/");
     }
   }, [userEncontrado]);
+
+  const EncerrarSesao = () => {
+    Logout();
+    navigate("/");
+  };
 
   return (
     <BannerContainer>
@@ -114,14 +124,14 @@ const Profile = () => {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
-            backgroundColor: ""
+            backgroundColor: "",
           }}
         >
           <Box
             sx={{
-              zIndex: '2',
+              zIndex: "2",
               position: "absolute",
-              top: '340px',
+              top: "340px",
               backgroundColor: "var(--laranja)",
               display: "flex",
               alignItems: "center",
@@ -149,7 +159,7 @@ const Profile = () => {
         <Nome>{nome}</Nome>
         <Email>{email}</Email>
         <Instituicao>{nomeInstituicao}</Instituicao>
-        <ButtonBanner>
+        <ButtonBanner onClick={EncerrarSesao}>
           <LogoutIcon /> Logout
         </ButtonBanner>
       </Words>

@@ -98,13 +98,18 @@ function DropdownMenu({ nome, src }) {
   const { Logout, userEncontrado } = useUser();
 
   const navigate = useNavigate();
-  
+
   const NavigateToProfile = () => {
     navigate("/dashboard/user/profile");
   };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const EncerrarSesao = () => {
+    Logout();
+    navigate("/");
   };
 
   return (
@@ -116,16 +121,18 @@ function DropdownMenu({ nome, src }) {
       <Dropdown isOpen={isOpen} onMouseLeave={toggleDropdown}>
         <DropdownList>
           <ProfileInfo>
-            <StyledAvatarDropMenu onClick={toggleDropdown} alt={nome} src={src} />
-            <Box
-              sx={{ marginLeft: '5px' }}
-            >
+            <StyledAvatarDropMenu
+              onClick={toggleDropdown}
+              alt={nome}
+              src={src}
+            />
+            <Box sx={{ marginLeft: "5px" }}>
               <NameDropMenu>{nome}</NameDropMenu>
               <NameDropMenu>{userEncontrado.email}</NameDropMenu>
             </Box>
           </ProfileInfo>
         </DropdownList>
-        
+
         <Divider />
 
         <DropdownList>
@@ -135,7 +142,7 @@ function DropdownMenu({ nome, src }) {
               <DropdownLink>Perfil</DropdownLink>
             </OptionContainer>
           </DropdownItem>
-          <DropdownItem  onClick={Logout}>
+          <DropdownItem onClick={EncerrarSesao}>
             <OptionContainer>
               <LogoutIcon />
               <DropdownLink>Logout</DropdownLink>
