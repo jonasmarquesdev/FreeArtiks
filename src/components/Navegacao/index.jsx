@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import SearchInputComponent from "../SearchInputComponent";
 
 // assets
-import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../../assets/brand-raw.png";
 import { useUser } from "../../context/UserContext";
 import DropdownMenu from "../DropdownMenu";
+import MenuHamburguer from "../MenuHamburguer";
 
 const NavegacaoContainer = styled.nav`
   margin-top: 20px;
@@ -53,7 +53,7 @@ const Navegacao = () => {
     <>
       <NavegacaoContainer>
         <MenuGroup>
-          <MenuIcon sx={{ fontSize: 50, color: "var(--preto)" }} />
+          <MenuHamburguer />
           <Logo src={logo} onClick={() => navigate("/")} />
         </MenuGroup>
         <SearchInputComponent />
