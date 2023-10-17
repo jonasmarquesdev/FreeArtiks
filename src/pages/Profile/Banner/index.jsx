@@ -89,17 +89,21 @@ const Profile = () => {
   const navigate = useNavigate();
 
   // Credentials
-  const [foto, setFoto] = useState(null);
-  const [ocupacao, setOcupacao] = useState("");
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [nomeInstituicao, setNomeInstituicao] = useState("");
-  const [sobre, setSobre] = useState("");
+  const [foto, setFoto] = useState(userEncontrado ? userEncontrado.image : null);
+  const [ocupacao, setOcupacao] = useState(userEncontrado ? userEncontrado.ocupacao || "" : "");
+  const [nome, setNome] = useState(userEncontrado ? userEncontrado.nome : "");
+  const [email, setEmail] = useState(userEncontrado ? userEncontrado.email : "");
+  const [nomeInstituicao, setNomeInstituicao] = useState(userEncontrado ? userEncontrado.nomeinstituicao : "");
+  const [sobre, setSobre] = useState(userEncontrado ? userEncontrado.sobre : "");
 
   useEffect(() => {
-    if (userEncontrado && userEncontrado.nome) {
+    // Recuperar os dados do usuário do localStorage
+    const storedUserEncontrado = localStorage.getItem("userEncontrado");
+
+    if (storedUserEncontrado) {
+      const userEncontrado = JSON.parse(storedUserEncontrado);
       setFoto(userEncontrado.image);
-      setOcupacao(userEncontrado.ocupacao);
+      setOcupacao(userEncontrado.ocupacao || "");
       setNome(userEncontrado.nome);
       setEmail(userEncontrado.email);
       setNomeInstituicao(userEncontrado.nomeinstituicao);
@@ -107,7 +111,18 @@ const Profile = () => {
     } else {
       navigate("/");
     }
-  }, [userEncontrado]);
+    const handleKeyDown = (e) => {
+      if (e.key === "F5") {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [navigate]);
 
   const EncerrarSesao = () => {
     Logout();
