@@ -33,7 +33,7 @@ const HistoricoContainer = styled.div`
 const Card = styled.div`
   background-color: var(--laranja);
   border-radius: 20px;
-  height: 50px;
+  height: auto;
   width: 250px;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@ const Card = styled.div`
 `;
 
 const SubTitulo = styled.p`
-  padding: 12px;
+  padding: 12px 20px;
 `;
 
 const TituloSecao = styled.h3`
@@ -76,7 +76,6 @@ const Profile = () => {
                   {userEncontrado.recomendado.map((livro, index) => (
                     <Card key={index}>
                       <SubTitulo>{livro.titulo}</SubTitulo>
-                      {console.log(userEncontrado.lendo)}
                     </Card>
                   ))}
                 </CardContainer>
@@ -91,7 +90,6 @@ const Profile = () => {
               {userEncontrado.lendo.map((livro, index) => (
                 <Card key={index}>
                   <SubTitulo>{livro.titulo}</SubTitulo>
-                  {console.log(userEncontrado.lendo)}
                 </Card>
               ))}
             </CardContainer>
