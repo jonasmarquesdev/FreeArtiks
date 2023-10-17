@@ -31,7 +31,8 @@ const HistoricoContainer = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: var(--laranja);
+  background-color: var(--branco-default);
+  box-shadow: 0 0 10px var(--sombra-form);
   border-radius: 20px;
   height: auto;
   width: 250px;
