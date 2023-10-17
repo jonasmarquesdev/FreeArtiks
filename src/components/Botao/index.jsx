@@ -10,7 +10,7 @@ export const Button = styled.button`
   border-radius: 8px;
   width: 120px;
   height: 45;
-  box-shadow: 0px 4px 4px 0px var(--box-shadow);
+  box-shadow: 0px 4px 4px 0px var(--sombra-media);
   cursor: pointer;
 
   &:hover {

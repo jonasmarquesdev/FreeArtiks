@@ -44,7 +44,7 @@ const TitleComNome = styled(TitleMargin)`
   position: absolute;
   margin-left: -2em;
   margin-top: -2em;
-  color: var(--cor-de-fundo);
+  color: var(--background-default);
 `;
 
 const Blob = styled.img`

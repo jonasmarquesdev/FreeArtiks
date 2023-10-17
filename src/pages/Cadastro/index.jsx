@@ -21,7 +21,7 @@ const CadastroPage = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: var(--cor-de-fundo);
+  background-color: var(--background-default);
   transition: all 0.2s;
 `;
 
@@ -32,14 +32,14 @@ const CadastroForm = styled.form`
   justify-content: center;
   gap: 20px;
   flex-direction: column;
-  background-color: var(--form-fundo);
+  background-color: var(--fundo-form);
   height: auto;
   width: 500px;
   padding-bottom: 40px;
   padding-top: 40px;
   margin-bottom: 50px;
   border-radius: 8px;
-  box-shadow: 0 0 10px var(--form-box-shadow);
+  box-shadow: 0 0 10px var(--sombra-form);
 `;
 
 const ParagrafoCadastro = styled.p`

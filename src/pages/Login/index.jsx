@@ -16,7 +16,7 @@ const LoginPage = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: var(--cor-de-fundo);
+  background-color: var(--background-default);
 `;
 
 const LoginForm = styled.form`
@@ -26,13 +26,13 @@ const LoginForm = styled.form`
   justify-content: center;
   gap: 20px;
   flex-direction: column;
-  background-color: var(--form-fundo);
+  background-color: var(--fundo-form);
   height: 500px;
   width: 500px;
   padding: 20px;
   margin-bottom: 50px;
   border-radius: 8px;
-  box-shadow: 0 0 10px var(--form-box-shadow);
+  box-shadow: 0 0 10px var(--sombra-form);
 `;
 
 const ParagrafoCadastro = styled.p`

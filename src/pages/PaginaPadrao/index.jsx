@@ -9,7 +9,7 @@ const LayoutContainer = styled.div`
   align-items: center;
   width: 100%;
   min-width: 1250px;
-  background-color: var(--cor-de-fundo);
+  background-color: var(--background-default);
 `;
 
 const Footer = styled.footer`

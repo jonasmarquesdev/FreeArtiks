@@ -47,7 +47,7 @@ const Dropdown = styled.div`
   top: 100%;
   right: -20px;
   background-color: var(--branco-default);
-  border: 1px solid var(--border-cinza);
+  border: 1px solid var(--borda-cinza);
   list-style: none;
   width: 250px;
 `;

@@ -2,23 +2,22 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@700&display=swap'); */
 
 :root {
+    --fonte-principal: 'Open Sans';
+    --background-default: #FFFBF3;
     --branco-default: #FFFFFF;
-    --branco: #f0f0f0;
     --branco-secundario: #f2f2f2;
+    --branco-terceiro: #f0f0f0;
     --cinza: rgba(124, 121, 121, 0.65);
-    --fade-esmaecido: rgba(0, 0, 0, 0.30);
     --preto: rgba(0, 0, 0, 0.65);
-    --box-shadow: rgba(0, 0, 0, 0.25);
-    --form-box-shadow: rgba(0, 0, 0, 0.1);
-    --form-fundo: rgba(255, 255, 255, 0.6);
-    --border-cinza: #ccc;
+    --sombra: rgba(0, 0, 0, 0.30);
+    --sombra-media: rgba(0, 0, 0, 0.25);
+    --sombra-form: rgba(0, 0, 0, 0.1);
+    --fundo-form: rgba(255, 255, 255, 0.6);
+    --borda-cinza: #ccc;
     --cinza-escuro: #999;
-    --cor-de-fundo: #FFFBF3;
     --laranja: #FF8927;
     --laranja-claro: #ff892977;
-    --verde-grass-introdutorio: #46A758;
+    --verde-grama-introdutorio: #46A758;
     --azul-importante: #0090FF;
     --red-recomendo: #E5484D;
-    --fonte-principal: 'Mukta';
-    --fonte-secundaria: 'Open Sans';
 }

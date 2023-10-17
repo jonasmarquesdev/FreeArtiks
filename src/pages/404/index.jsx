@@ -10,7 +10,7 @@ const LoginPage = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: var(--cor-de-fundo);
+  background-color: var(--background-default);
 `;
 
 const Code = styled.h1`
