@@ -99,7 +99,7 @@ function DropdownMenu({ nome, src }) {
 
   const navigate = useNavigate();
 
-  const NavigateToProfile = () => {
+  const navigateToProfile = () => {
     navigate("/dashboard/user/profile");
   };
 
@@ -136,7 +136,7 @@ function DropdownMenu({ nome, src }) {
         <Divider />
 
         <DropdownList>
-          <DropdownItem onClick={NavigateToProfile}>
+          <DropdownItem onClick={navigateToProfile}>
             <OptionContainer>
               <AccountCircleIcon />
               <DropdownLink>Perfil</DropdownLink>
