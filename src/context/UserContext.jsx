@@ -35,6 +35,18 @@ export function UserProvider({ children }) {
           titulo: "Projeto de Banco de Dados: Volume 4",
         },
       ],
+      lido: [
+        {
+          id: 1,
+          titulo:
+            "Fundamentos de bancos de dados: Modelagem, projeto e linguagem SQL",
+        },
+        {
+          id: 6,
+          titulo:
+            "Projeto, Desenvolvimento de Aplicações e Administração de Banco de Dados",
+        },
+      ],
     },
     {
       nome: "Ana Beatriz de Oliveira Santos",
