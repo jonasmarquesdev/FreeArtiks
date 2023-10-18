@@ -72,18 +72,20 @@ const SelectComSombra = styled(Select)`
   width: 250px;
 `;
 
+const categoriaProps = (props) => {
+  if (props.categoria === "Introdutório") {
+    return "var(--verde-grama-introdutorio)";
+  } else if (props.categoria === "Importante") {
+    return "var(--azul-importante)";
+  } else {
+    return "var(--red-recomendado)";
+  }
+};
+
 const Categoria = styled.div`
   width: 100%;
   height: 30px;
-  background-color: ${(props) => {
-    if (props.categoria === "Introdutório") {
-      return "var(--verde-grama-introdutorio)";
-    } else if (props.categoria === "Importante") {
-      return "var(--azul-importante)";
-    } else {
-      return "var(--red-recomendado)";
-    }
-  }};
+  background-color: ${(props) => categoriaProps(props)};
   display: flex;
   align-items: center;
   justify-content: center;
