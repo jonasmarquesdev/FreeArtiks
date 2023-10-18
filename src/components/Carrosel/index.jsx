@@ -35,6 +35,10 @@ const Titulo = styled.h2`
 const TituloItem = styled.p`
   max-width: 160px;
   color: var(--preto);
+
+  ${Book}:hover & {
+    color: var(--laranja);
+  }
 `;
 
 const TituloContainer = styled.div`
