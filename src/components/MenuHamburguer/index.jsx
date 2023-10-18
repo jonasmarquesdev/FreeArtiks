@@ -39,7 +39,7 @@ const MenuList = styled.ul`
   top: 50px;
   right: -10;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--sombra-form);
   border-radius: 4px;
   display: ${(props) => (props.isOpen ? "block" : "none")};
   width: 216px;
@@ -76,6 +76,10 @@ function MenuHamburguer() {
     navigate("/")
   };
 
+  const navigateToExplorar = () => {
+    navigate("/explorar");
+  };
+
   return (
     <HamburguerMenuContainer isOpen={menuAberto}>
       <MenuIconStyled isOpen={menuAberto} onClick={toggleMenu} />
@@ -88,7 +92,7 @@ function MenuHamburguer() {
           <LibraryBooksOutlinedIcon />
           Minha biblioteca
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={navigateToExplorar}>
           <BookmarksOutlinedIcon />
           Categorias
         </MenuItem>

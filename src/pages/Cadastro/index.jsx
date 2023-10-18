@@ -10,7 +10,7 @@ import {
 } from "../../components/Icones";
 import IlustracaoComponent from "../../components/Ilustracao";
 import { Button } from "../../components/Botao";
-import { Input, InputGroup, Label } from "../../components/CampoTexto";
+import { Input, InputGroup, Label, Option, Select } from "../../components/CampoTexto";
 import ilustracaoCadastroEtapa1 from "../../assets/ilustracaoCadastroEtapa1.svg";
 import ilustracaoCadastroEtapa2 from "../../assets/ilustracaoCadastroEtapa2.svg";
 import LinkEstilizado from "../../components/LinkEstilizado";
@@ -49,22 +49,6 @@ const ParagrafoCadastro = styled.p`
   line-height: 19px;
   color: var(--cinza);
 `;
-
-const Select = styled.select`
-  padding: 1em;
-  padding-left: 2em;
-  margin: 5px 0;
-  border: 1px solid var(--branco-secundario);
-  border-radius: 8px;
-  width: 300px;
-  height: 50px;
-
-  &:focus {
-    outline: 2px solid var(--laranja);
-  }
-`;
-
-const Option = styled.option``;
 
 const Cadastro = () => {
   const [etapaAtiva, setEtapaAtiva] = useState(0);

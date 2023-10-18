@@ -8,6 +8,7 @@ import ilustracao from "../../../assets/ilustracaoBanner.svg";
 import mascote from "../../../assets/mascote.png";
 import { useUser } from "../../../context/UserContext";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BannerContainer = styled.div`
   height: 500px;
@@ -95,43 +96,53 @@ const Balloon = styled.div`
 
 const Ilustracao = styled.img`
   pointer-events: none;
-  user-select: none; 
+  user-select: none;
 `;
 
 const Banner = () => {
   const { userEncontrado } = useUser();
   const [userNomeSplice, setUserNomeSplice] = useState("");
   const [showBalloonProp, setShowBalloonProp] = useState(false);
-  
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (userEncontrado && userEncontrado.nome) {
       setUserNomeSplice(userEncontrado.nome.split(" ")[0]);
     } else {
-      setUserNomeSplice("Visitante")
+      setUserNomeSplice("Visitante");
     }
   }, [userEncontrado]);
 
   const ShowBalloon = () => {
-    setShowBalloonProp(!showBalloonProp)
-  }
+    setShowBalloonProp(!showBalloonProp);
+  };
+
+  const navigateToExplorar = () => {
+    navigate("/explorar");
+  };
 
   return (
     <BannerContainer>
       <Blob src={blob} />
       <Words>
-        <TitleComNome>
-          Olá,{" "}
-          {userNomeSplice}!
-        </TitleComNome>
+        <TitleComNome>Olá, {userNomeSplice}!</TitleComNome>
         <Title>Com o FreeArtiks você pode!</Title>
         <TitleMargin>
           Explore o Conhecimento: Artigos e Livros à Distância de um Clique!
         </TitleMargin>
         <MascoteContainer>
-          <Mascote src={mascote} onMouseEnter={ShowBalloon} onMouseLeave={ShowBalloon} />
-          <Balloon showBalloonProp={showBalloonProp}>"A boa educação é moeda de ouro. Em toda a parte tem valor." — Pe. António Vieira</Balloon>
+          <Mascote
+            src={mascote}
+            onMouseEnter={ShowBalloon}
+            onMouseLeave={ShowBalloon}
+          />
+          <Balloon showBalloonProp={showBalloonProp}>
+            "A boa educação é moeda de ouro. Em toda a parte tem valor." — Pe.
+            António Vieira
+          </Balloon>
         </MascoteContainer>
-        <ButtonBanner>Explorar</ButtonBanner>
+        <ButtonBanner onClick={navigateToExplorar}>Explorar</ButtonBanner>
       </Words>
       <Ilustracao src={ilustracao} />
     </BannerContainer>

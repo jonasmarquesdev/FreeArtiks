@@ -28,4 +28,20 @@ const InputGroup = styled.div`
   gap: 5px;
 `;
 
-export { Input, Label, InputGroup };
+const Select = styled.select`
+  padding: 1em;
+  padding-left: 2em;
+  margin: 5px 0;
+  border: 1px solid var(--branco-secundario);
+  border-radius: 8px;
+  width: 300px;
+  height: 50px;
+
+  &:focus {
+    outline: 2px solid var(--laranja);
+  }
+`;
+
+const Option = styled.option``;
+
+export { Input, Label, InputGroup, Select, Option };
