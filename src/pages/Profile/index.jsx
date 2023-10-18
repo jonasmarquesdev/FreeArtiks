@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import Banner from "./Banner";
 import { useUser } from "../../context/UserContext";
+import { motion } from "framer-motion";
 
-const DashboardContainer = styled.div`
+const ProfileContainer = styled.div`
   width: 1200px;
   /* background-color: #aa5050; */
   display: flex;
@@ -63,42 +64,49 @@ const Profile = () => {
   const { userEncontrado } = useUser();
 
   return (
-    <DashboardContainer>
-      <Banner />
-      <Space />
-      <Biblioteca>
-        <Titulo>Histórico</Titulo>
-        <HistoricoContainer>
-          {userEncontrado.ocupacao === "Professor" ? (
-            <>
-              <SecaoContainer>
-                <TituloSecao>Recomendado</TituloSecao>
-                <CardContainer>
-                  {userEncontrado.recomendado.map((livro, index) => (
-                    <Card key={index}>
-                      <SubTitulo>{livro.titulo}</SubTitulo>
-                    </Card>
-                  ))}
-                </CardContainer>
-              </SecaoContainer>
-            </>
-          ) : (
-            ""
-          )}
-          <SecaoContainer>
-            <TituloSecao>Lendo</TituloSecao>
-            <CardContainer>
-              {userEncontrado.lendo.map((livro, index) => (
-                <Card key={index}>
-                  <SubTitulo>{livro.titulo}</SubTitulo>
-                </Card>
-              ))}
-            </CardContainer>
-          </SecaoContainer>
-        </HistoricoContainer>
-      </Biblioteca>
-      <Space />
-    </DashboardContainer>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <ProfileContainer>
+        <Banner />
+        <Space />
+        <Biblioteca>
+          <Titulo>Histórico</Titulo>
+          <HistoricoContainer>
+            {userEncontrado.ocupacao === "Professor" ? (
+              <>
+                <SecaoContainer>
+                  <TituloSecao>Recomendado</TituloSecao>
+                  <CardContainer>
+                    {userEncontrado.recomendado.map((livro, index) => (
+                      <Card key={index}>
+                        <SubTitulo>{livro.titulo}</SubTitulo>
+                      </Card>
+                    ))}
+                  </CardContainer>
+                </SecaoContainer>
+              </>
+            ) : (
+              ""
+            )}
+            <SecaoContainer>
+              <TituloSecao>Lendo</TituloSecao>
+              <CardContainer>
+                {userEncontrado.lendo.map((livro, index) => (
+                  <Card key={index}>
+                    <SubTitulo>{livro.titulo}</SubTitulo>
+                  </Card>
+                ))}
+              </CardContainer>
+            </SecaoContainer>
+          </HistoricoContainer>
+        </Biblioteca>
+        <Space />
+      </ProfileContainer>
+    </motion.div>
   );
 };
 

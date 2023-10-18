@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { useUser } from "../../context/UserContext";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 import ClearIcon from "@mui/icons-material/Clear";
 import { Button } from "../../components/Botao";
 import { Box } from "@mui/material";
 
-const DashboardContainer = styled.div`
+const Container = styled.div`
   width: 1200px;
   /* background-color: #aa5050; */
   display: flex;
@@ -36,9 +37,10 @@ const HistoricoContainer = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: ${(props) => (props.lido ? "#31D689" : "var(--branco-default)")};
-  
-  // 31D689 verde 
+  background-color: ${(props) =>
+    props.lido ? "#31D689" : "var(--branco-default)"};
+
+  // 31D689 verde
   box-shadow: 0 0 10px var(--sombra-form);
   border-radius: 20px;
   height: auto;
@@ -87,103 +89,111 @@ const Biblioteca = () => {
   }, []);
 
   return (
-    <DashboardContainer>
-      <Space />
-      <BibliotecaContainer>
-        <Titulo>Minha biblioteca</Titulo>
-        <HistoricoContainer>
-          {userEncontrado.ocupacao === "Professor" ? (
-            <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Container>
+        <Space />
+        <BibliotecaContainer>
+          <Titulo>Minha biblioteca</Titulo>
+          <HistoricoContainer>
+            {userEncontrado.ocupacao === "Professor" ? (
+              <>
+                <SecaoContainer>
+                  <TituloSecao>Recomendado</TituloSecao>
+                  <CardContainer>
+                    {userEncontrado.recomendado.map((livro, index) => (
+                      <Card key={index}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                          }}
+                        >
+                          <SubTitulo>{livro.titulo}</SubTitulo>
+                          <ClearIcon
+                            sx={{
+                              backgroundColor: "red",
+                              color: "white",
+                              borderRadius: "12px",
+                              display: "flex",
+                              alignSelf: "flex-start",
+                              justifyContent: "center",
+                            }}
+                          />
+                        </Box>
+                        <Button>Acessar</Button>
+                      </Card>
+                    ))}
+                  </CardContainer>
+                </SecaoContainer>
+              </>
+            ) : (
+              ""
+            )}
+
+            {userEncontrado.lendo ? (
               <SecaoContainer>
-                <TituloSecao>Recomendado</TituloSecao>
+                <TituloSecao>Lendo</TituloSecao>
                 <CardContainer>
-                  {userEncontrado.recomendado.map((livro, index) => (
-                    <Card key={index}>
+                    {userEncontrado.lendo.map((livro, index) => (
+                      <Card key={index}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                          }}
+                        >
+                          <SubTitulo>{livro.titulo}</SubTitulo>
+                          <ClearIcon
+                            sx={{
+                              backgroundColor: "red",
+                              color: "white",
+                              borderRadius: "12px",
+                              display: "flex",
+                              alignSelf: "flex-start",
+                              justifyContent: "center",
+                            }}
+                          />
+                        </Box>
+                        <Button>Acessar</Button>
+                      </Card>
+                    ))}
+                  </CardContainer>
+              </SecaoContainer>
+            ) : (
+              ""
+            )}
+
+            {userEncontrado.lido ? (
+              <SecaoContainer>
+                <TituloSecao>Lido</TituloSecao>
+                <CardContainer>
+                  {userEncontrado.lido.map((livro, index) => (
+                    <Card lido key={index}>
                       <Box
                         sx={{
                           display: "flex",
                         }}
                       >
-                        <SubTitulo>{livro.titulo}</SubTitulo>
-                        <ClearIcon
-                          sx={{
-                            backgroundColor: "red",
-                            color: "white",
-                            borderRadius: "12px",
-                            display: "flex",
-                            alignSelf: "flex-start",
-                            justifyContent: "center",
-                          }}
-                        />
+                        <SubTitulo lido>{livro.titulo}</SubTitulo>
                       </Box>
                       <Button>Acessar</Button>
                     </Card>
                   ))}
                 </CardContainer>
               </SecaoContainer>
-            </>
-          ) : (
-            ""
-          )}
-
-          {userEncontrado.lendo ? (
-            <SecaoContainer>
-              <TituloSecao>Lendo</TituloSecao>
-              <CardContainer>
-                {userEncontrado.lendo.map((livro, index) => (
-                  <Card key={index}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                      }}
-                    >
-                      <SubTitulo>{livro.titulo}</SubTitulo>
-                      <ClearIcon
-                        sx={{
-                          backgroundColor: "red",
-                          color: "white",
-                          borderRadius: "12px",
-                          display: "flex",
-                          alignSelf: "flex-start",
-                          justifyContent: "center",
-                        }}
-                      />
-                    </Box>
-                    <Button>Acessar</Button>
-                  </Card>
-                ))}
-              </CardContainer>
-            </SecaoContainer>
-          ) : (
-            ""
-          )}
-
-          {userEncontrado.lido ? (
-            <SecaoContainer>
-              <TituloSecao>Lido</TituloSecao>
-              <CardContainer>
-                {userEncontrado.lido.map((livro, index) => (
-                  <Card lido key={index}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                      }}
-                    >
-                      <SubTitulo lido>{livro.titulo}</SubTitulo>
-                    </Box>
-                    <Button>Acessar</Button>
-                  </Card>
-                ))}
-              </CardContainer>
-            </SecaoContainer>
-          ) : (
-            ""
-          )}
-        </HistoricoContainer>
+            ) : (
+              ""
+            )}
+          </HistoricoContainer>
+          <Space />
+        </BibliotecaContainer>
         <Space />
-      </BibliotecaContainer>
+      </Container>
       <Space />
-    </DashboardContainer>
+    </motion.div>
   );
 };
 

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useLivro } from "../../context/ProductContext";
 import Catalogo from "../../components/Catalogo";
+import { motion } from "framer-motion";
 
 const DashboardContainer = styled.div`
   width: 1200px;
@@ -17,11 +18,18 @@ const Space = styled.div`
 const Explorar = () => {
   const { livros } = useLivro();
   return (
-    <DashboardContainer>
-      <Space />
-      <Catalogo titulo="Catalogo" lista={livros} />
-      <Space />
-    </DashboardContainer>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <DashboardContainer>
+        <Space />
+        <Catalogo titulo="Catalogo" lista={livros} />
+        <Space />
+      </DashboardContainer>
+    </motion.div>
   );
 };
 

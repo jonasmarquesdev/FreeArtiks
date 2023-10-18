@@ -60,7 +60,7 @@ const MenuItem = styled.li`
 `;
 
 function MenuHamburguer() {
-  const [menuAberto, setMenuAberto] = useState(true);
+  const [menuAberto, setMenuAberto] = useState(false);
   const { isLoggedIn } = useUser();
   const navigate = useNavigate();
 

@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import ilustracaoNotFound from "../../assets/notfound404.gif";
 import { Button } from "../../components/Botao";
 import { Box } from "@mui/system";
+import { motion } from "framer-motion";
 
-const LoginPage = styled.div`
+const NotFoundPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,30 +33,37 @@ const NotFound404 = () => {
   };
 
   return (
-    <LoginPage>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "30px",
-        }}
-      >
-        <Ilustracao src={ilustracaoNotFound} />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <NotFoundPage>
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row",
             alignItems: "center",
+            justifyContent: "center",
+            gap: "30px",
           }}
         >
-          <Code>404</Code>
-          <h1>PAGE NOT FOUND</h1>
-          <Botao onClick={backToDashboard}>Voltar</Botao>
+          <Ilustracao src={ilustracaoNotFound} />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Code>404</Code>
+            <h1>PAGE NOT FOUND</h1>
+            <Botao onClick={backToDashboard}>Voltar</Botao>
+          </Box>
         </Box>
-      </Box>
-    </LoginPage>
+      </NotFoundPage>
+    </motion.div>
   );
 };
 

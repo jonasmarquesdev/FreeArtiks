@@ -6,7 +6,8 @@ import { useUser } from "../../context/UserContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Skeleton } from "@mui/material";
+import useDataLoading from "../../context/useDataLoading";
 
 const Wrapper = styled.div`
   display: flex;
@@ -96,6 +97,7 @@ const OptionContainer = styled.div`
 function DropdownMenu({ nome, src }) {
   const [isOpen, setIsOpen] = useState(false);
   const { Logout, userEncontrado } = useUser();
+  const isLoading = useDataLoading(2000);
 
   const navigate = useNavigate();
 
@@ -115,8 +117,24 @@ function DropdownMenu({ nome, src }) {
   return (
     <UserWrapper>
       <Wrapper>
-        <Name onClick={toggleDropdown}>{nome}</Name>
-        <StyledAvatar onClick={toggleDropdown} alt={nome} src={src} />
+        <Name onClick={toggleDropdown}>
+          {isLoading ? (
+            <Skeleton width={100} height={30} /> // Ajuste o tamanho conforme necessário
+          ) : (
+            nome
+          )}
+        </Name>
+
+        {isLoading ? (
+          <Skeleton
+            sx={{ marginLeft: "16px" }}
+            variant="circular"
+            width={48}
+            height={48}
+          />
+        ) : (
+          <StyledAvatar onClick={toggleDropdown} alt={nome} src={src} />
+        )}
       </Wrapper>
       <Dropdown isOpen={isOpen} onMouseLeave={toggleDropdown}>
         <DropdownList>

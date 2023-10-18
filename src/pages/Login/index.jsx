@@ -9,6 +9,7 @@ import logo from "../../assets/logo1.png";
 import { Button } from "../../components/Botao";
 import LinkEstilizado from "../../components/LinkEstilizado";
 import { useUser } from "../../context/UserContext";
+import { motion } from "framer-motion";
 
 const LoginPage = styled.div`
   display: flex;
@@ -61,37 +62,44 @@ const Login = () => {
   }, [isLoggedIn, navigate]);
 
   return (
-    <LoginPage>
-      <IlustracaoComponent src={ilustracaoLogin} />
-      <LoginForm onSubmit={handleSubmit}>
-        <Icon src={logo} alt="logo do freeartiks" />
-        <InputGroup>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            type="text"
-            placeholder="joao@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <Label htmlFor="password">Senha</Label>
-          <Input
-            type="password"
-            placeholder="1234"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-          />
-        </InputGroup>
-        <Button type="submit">Entrar</Button>
-        <ParagrafoCadastro>
-          Ainda não tem conta?{" "}
-          <LinkEstilizado to="/auth/register">
-            Faça seu cadastro!
-          </LinkEstilizado>
-        </ParagrafoCadastro>
-      </LoginForm>
-    </LoginPage>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <LoginPage>
+        <IlustracaoComponent src={ilustracaoLogin} />
+        <LoginForm onSubmit={handleSubmit}>
+          <Icon src={logo} alt="logo do freeartiks" />
+          <InputGroup>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              type="text"
+              placeholder="joao@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Label htmlFor="password">Senha</Label>
+            <Input
+              type="password"
+              placeholder="1234"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+            />
+          </InputGroup>
+          <Button type="submit">Entrar</Button>
+          <ParagrafoCadastro>
+            Ainda não tem conta?{" "}
+            <LinkEstilizado to="/auth/register">
+              Faça seu cadastro!
+            </LinkEstilizado>
+          </ParagrafoCadastro>
+        </LoginForm>
+      </LoginPage>
+    </motion.div>
   );
 };
 

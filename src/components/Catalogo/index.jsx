@@ -2,7 +2,8 @@
 import styled from "styled-components";
 import { Label, Option, Select } from "../CampoTexto";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
+import useDataLoading from "../../context/useDataLoading";
 // import { Button } from "@mui/material";
 
 const BookListContainer = styled.div`
@@ -71,9 +72,27 @@ const SelectComSombra = styled(Select)`
   width: 250px;
 `;
 
+const SkeletonBook = styled.div`
+  margin-right: 20px;
+  text-align: center;
+  cursor: pointer;
+  padding: 12px 20px;
+`;
+
+const SkeletonImage = styled(Skeleton)`
+  width: 100px;
+  height: auto;
+`;
+
+const SkeletonTitle = styled(Skeleton)`
+  max-width: 160px;
+`;
+
 function Catalogo({ titulo, lista }) {
   const [filtro, setFiltro] = useState("");
   const [ordenar, setOrdenar] = useState("");
+
+  const isLoading = useDataLoading(2000);
 
   return (
     <BookListContainer>
@@ -82,24 +101,34 @@ function Catalogo({ titulo, lista }) {
       </TituloContainer>
 
       <FiltrosContainer>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Label htmlFor="ocupacao">Ordenar por:</Label>
-          <SelectComSombra value={ordenar} onChange={(e) => setOrdenar(e.target.value)}>
+          <SelectComSombra
+            value={ordenar}
+            onChange={(e) => setOrdenar(e.target.value)}
+          >
             <Option value="">Selecione a ordem</Option>
             <Option value="introdutorio">Introdutório</Option>
             <Option value="importante">Importante</Option>
             <Option value="recomendado">Recomendado</Option>
           </SelectComSombra>
         </Box>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Label htmlFor="ocupacao">Filtrar por:</Label>
-          <SelectComSombra value={filtro} onChange={(e) => setFiltro(e.target.value)}>
+          <SelectComSombra
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+          >
             <Option value="">Selecione o tipo de item</Option>
             <Option value="livro">Livro</Option>
             <Option value="artigo">Artigo</Option>
@@ -108,22 +137,38 @@ function Catalogo({ titulo, lista }) {
       </FiltrosContainer>
 
       <Row>
-        {lista.map((livro) => (
-          <Book key={livro.id}>
-            <BookImage src={livro.image} alt="Livro 1" />
-            <AutorItem>por {livro.autor}</AutorItem>
-            <TituloItem>{livro.titulo}</TituloItem>
-          </Book>
-        ))}
+        {isLoading
+          ? lista.map((livro) => (
+              <SkeletonBook key={livro.id}>
+                <SkeletonImage variant="rect" width={150} height={185} />
+                <SkeletonTitle variant="text" />
+                <SkeletonTitle variant="text" />
+              </SkeletonBook>
+            ))
+          : lista.map((livro) => (
+              <Book key={livro.id}>
+                <BookImage src={livro.image} alt="Livro 1" />
+                <AutorItem>por {livro.autor}</AutorItem>
+                <TituloItem>{livro.titulo}</TituloItem>
+              </Book>
+            ))}
       </Row>
       <Row>
-        {lista.map((livro) => (
-          <Book key={livro.id}>
-            <BookImage src={livro.image} alt="Livro 1" />
-            <AutorItem>por {livro.autor}</AutorItem>
-            <TituloItem>{livro.titulo}</TituloItem>
-          </Book>
-        ))}
+        {isLoading
+          ? lista.map((livro) => (
+              <SkeletonBook key={livro.id}>
+                <SkeletonImage variant="rect" width={150} height={185} />
+                <SkeletonTitle variant="text" />
+                <SkeletonTitle variant="text" />
+              </SkeletonBook>
+            ))
+          : lista.map((livro) => (
+              <Book key={livro.id}>
+                <BookImage src={livro.image} alt="Livro 1" />
+                <AutorItem>por {livro.autor}</AutorItem>
+                <TituloItem>{livro.titulo}</TituloItem>
+              </Book>
+            ))}
       </Row>
     </BookListContainer>
   );
