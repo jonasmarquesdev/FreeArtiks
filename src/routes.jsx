@@ -8,7 +8,7 @@ import PaginaLoginForm from "./pages/PaginaLoginForm";
 import Profile from "./pages/Profile";
 import { UserProvider } from "./context/UserContext";
 import NotFound404 from "./pages/404";
-import Biblioteca from "./pages/Biblioteca";
+import Biblioteca from "./pages/biblioteca";
 import Explorar from "./pages/Explorar";
 
 export default function AppRouter() {

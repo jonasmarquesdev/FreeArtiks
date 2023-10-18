@@ -39,8 +39,6 @@ const HistoricoContainer = styled.div`
 const Card = styled.div`
   background-color: ${(props) =>
     props.lido ? "#31D689" : "var(--branco-default)"};
-
-  // 31D689 verde
   box-shadow: 0 0 10px var(--sombra-form);
   border-radius: 20px;
   height: auto;
