@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: var(--fonte-principal), sans-serif;
     font-size: 1em;
     font-weight: 400;
 
