@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import ilustracaoLogin from "../../assets/ilustracaoLogin.svg";
@@ -53,9 +53,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    Login(email, senha);
-    (await isLoggedIn) === true ? navigate("/") : "";
+    await Login(email, senha);
   };
+
+  useEffect(() => {
+    isLoggedIn === true ? navigate("/") : "";
+  }, [isLoggedIn, navigate]);
 
   return (
     <LoginPage>
