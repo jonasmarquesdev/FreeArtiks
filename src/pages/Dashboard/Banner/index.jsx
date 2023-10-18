@@ -52,6 +52,8 @@ const Blob = styled.img`
   position: relative;
   left: 0%;
   bottom: 15%;
+  pointer-events: none;
+  user-select: none;
 `;
 
 const ButtonBanner = styled(Button)`
@@ -91,7 +93,10 @@ const Balloon = styled.div`
   border-radius: 20px 20px 20px 0px;
 `;
 
-const Ilustracao = styled.img``;
+const Ilustracao = styled.img`
+  pointer-events: none;
+  user-select: none; 
+`;
 
 const Banner = () => {
   const { userEncontrado } = useUser();

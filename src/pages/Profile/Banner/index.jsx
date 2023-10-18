@@ -82,6 +82,8 @@ const Ocupacao = styled.p`
 const Ilustracao = styled.img`
   width: 30%;
   align-self: flex-end;
+  pointer-events: none;
+  user-select: none;
 `;
 
 const Profile = () => {
