@@ -29,6 +29,7 @@ const Row = styled.div`
 
 const Titulo = styled.h2`
   color: var(--preto);
+  font-weight: 600;
 `;
 
 const TituloItem = styled.p`

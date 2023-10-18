@@ -38,7 +38,7 @@ const TituloItem = styled.p`
   max-width: 160px;
   color: var(--preto);
 
-  &:hover {
+  ${Book}:hover & {
     color: var(--laranja);
   }
 `;

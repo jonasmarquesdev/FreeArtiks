@@ -89,7 +89,7 @@ const Balloon = styled.div`
   height: 115px;
   background-color: var(--laranja);
   color: var(--branco-default);
-  padding: 1em;
+  padding: 1em .5em;
   text-align: center;
   border-radius: 20px 20px 20px 0px;
 `;
