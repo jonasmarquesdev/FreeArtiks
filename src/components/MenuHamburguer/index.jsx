@@ -68,7 +68,7 @@ function MenuHamburguer() {
 
   const navigateToProfile = () => {
     setMenuAberto(!menuAberto);
-    navigate("/dashboard/user/profile");
+    navigate("/dashboard/user/biblioteca");
   };
 
   const navigateToHome = () => {
