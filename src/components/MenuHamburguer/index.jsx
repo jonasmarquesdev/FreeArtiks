@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -59,7 +60,8 @@ const MenuItem = styled.li`
 `;
 
 function MenuHamburguer() {
-  const [menuAberto, setMenuAberto] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(true);
+  const { isLoggedIn } = useUser();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -73,7 +75,7 @@ function MenuHamburguer() {
 
   const navigateToHome = () => {
     setMenuAberto(!menuAberto);
-    navigate("/")
+    navigate("/");
   };
 
   const navigateToExplorar = () => {
@@ -88,10 +90,16 @@ function MenuHamburguer() {
           <HomeOutlinedIcon />
           Inicio
         </MenuItem>
-        <MenuItem onClick={navigateToProfile}>
-          <LibraryBooksOutlinedIcon />
-          Minha biblioteca
-        </MenuItem>
+        {isLoggedIn ? (
+          <>
+            <MenuItem onClick={navigateToProfile}>
+              <LibraryBooksOutlinedIcon />
+              Minha biblioteca
+            </MenuItem>
+          </>
+        ) : (
+          ""
+        )}
         <MenuItem onClick={navigateToExplorar}>
           <BookmarksOutlinedIcon />
           Categorias
