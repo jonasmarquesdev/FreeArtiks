@@ -72,6 +72,27 @@ const SelectComSombra = styled(Select)`
   width: 250px;
 `;
 
+const Categoria = styled.div`
+  width: 100%;
+  height: 30px;
+  background-color: ${(props) => {
+    if (props.categoria === "Introdutório") {
+      return "var(--verde-grama-introdutorio)";
+    } else if (props.categoria === "Importante") {
+      return "var(--azul-importante)";
+    } else {
+      return "var(--red-recomendado)";
+    }
+  }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    color: var(--branco-default);
+  }
+`;
+
 const SkeletonBook = styled.div`
   margin-right: 20px;
   text-align: center;
@@ -147,6 +168,9 @@ function Catalogo({ titulo, lista }) {
             ))
           : lista.map((livro) => (
               <Book key={livro.id}>
+                <Categoria categoria={livro.categoria}>
+                  <p>{livro.categoria}</p>
+                </Categoria>
                 <BookImage src={livro.image} alt="Livro 1" />
                 <AutorItem>por {livro.autor}</AutorItem>
                 <TituloItem>{livro.titulo}</TituloItem>
@@ -164,6 +188,9 @@ function Catalogo({ titulo, lista }) {
             ))
           : lista.map((livro) => (
               <Book key={livro.id}>
+                <Categoria categoria={livro.categoria}>
+                  <p>{livro.categoria}</p>
+                </Categoria>
                 <BookImage src={livro.image} alt="Livro 1" />
                 <AutorItem>por {livro.autor}</AutorItem>
                 <TituloItem>{livro.titulo}</TituloItem>
