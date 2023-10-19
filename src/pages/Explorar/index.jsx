@@ -26,7 +26,7 @@ const Explorar = () => {
     >
       <DashboardContainer>
         <Space />
-        <Catalogo titulo="Catalogo" lista={livros} />
+        <Catalogo titulo="Catálogo" lista={livros} />
         <Space />
       </DashboardContainer>
     </motion.div>

@@ -10,5 +10,6 @@ import image9 from "./image9.jpg";
 import image10 from "./image10.jpg";
 import image11 from "./image11.jpg";
 import image12 from "./image12.jpg";
+import image13 from "./image13.jpg";
 
-export { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12 };
+export { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13 };

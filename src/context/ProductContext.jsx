@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { createContext, useContext, useState } from "react";
-import { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12 } from "./assets";
+import { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13 } from "./assets";
 
 const LivroContext = createContext();
 const ArtigoContext = createContext();
@@ -32,6 +32,12 @@ export function LivroProvider({ children }) {
       titulo: "Smashing HTML5",
       image: image12,
       autor: "Bill Sanders",
+      categoria: "Introdutório",
+    },
+    {
+      titulo: "Internet das coisas (IoT)",
+      image: image13,
+      autor: "Davis Alves, Mário Peixoto e Thiago Rosa",
       categoria: "Introdutório",
     },
     {
