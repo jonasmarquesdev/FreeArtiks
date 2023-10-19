@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { createContext, useContext, useState } from "react";
-import { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13 } from "./assets";
+import { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18 } from "./assets";
 
 const LivroContext = createContext();
 const ArtigoContext = createContext();
@@ -38,6 +38,18 @@ export function LivroProvider({ children }) {
       titulo: "Internet das coisas (IoT)",
       image: image13,
       autor: "Davis Alves, Mário Peixoto e Thiago Rosa",
+      categoria: "Introdutório",
+    },
+    {
+      titulo: "Conceitos de Computação com o essencial de Java",
+      image: image14,
+      autor: "Cay Horstmann",
+      categoria: "Introdutório",
+    },
+    {
+      titulo: "Artes do Videogame: Conceitos e Técnicas",
+      image: image15,
+      autor: "Jesus de Paula Assis",
       categoria: "Introdutório",
     },
     {
@@ -86,6 +98,24 @@ export function LivroProvider({ children }) {
       titulo: "Projeto, Desenvolvimento de Aplicações e Administração de Banco de Dados",
       image: image6,
       autor: "Michael V. Mannino",
+      categoria: "Recomendado",
+    },
+    {
+      titulo: "Análise de Tráfego em Redes TCP/IP",
+      image: image16,
+      autor: "João Eriberto Mota Filho",
+      categoria: "Recomendado",
+    },
+    {
+      titulo: "Projetos de Ciência de Dados com Python",
+      image: image17,
+      autor: "Stephen Klosterman",
+      categoria: "Recomendado",
+    },
+    {
+      titulo: "Qualidade de Software na Prática",
+      image: image18,
+      autor: "Cleuton Sampaio",
       categoria: "Recomendado",
     },
   ];

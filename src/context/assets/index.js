@@ -11,5 +11,10 @@ import image10 from "./image10.jpg";
 import image11 from "./image11.jpg";
 import image12 from "./image12.jpg";
 import image13 from "./image13.jpg";
+import image14 from "./image14.jpg";
+import image15 from "./image15.jpg";
+import image16 from "./image16.jpg";
+import image17 from "./image17.jpg";
+import image18 from "./image18.jpg";
 
-export { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13 };
+export { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18 };
