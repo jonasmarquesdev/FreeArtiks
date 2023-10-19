@@ -97,7 +97,7 @@ const OptionContainer = styled.div`
 function DropdownMenu({ nome, src }) {
   const [isOpen, setIsOpen] = useState(false);
   const { Logout, userEncontrado } = useUser();
-  const isLoading = useDataLoading(2000);
+  const isLoading = useDataLoading(1500);
 
   const navigate = useNavigate();
 

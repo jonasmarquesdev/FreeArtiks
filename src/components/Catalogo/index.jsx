@@ -10,6 +10,7 @@ const BookListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10em;
 `;
 
 const Book = styled.div`
@@ -20,14 +21,15 @@ const Book = styled.div`
 `;
 
 const BookImage = styled.img`
-  max-width: 200px;
-  height: auto;
+  max-width: 150px;
+  height: 185px;
 `;
 
 const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* Define 6 colunas por linha */
+  gap: 20px; /* Espaçamento entre os livros */
+  padding: 20px 0; /* Espaçamento vertical */
 `;
 
 const Titulo = styled.h2`
@@ -115,7 +117,7 @@ function Catalogo({ titulo, lista }) {
   const [filtro, setFiltro] = useState("");
   const [ordenar, setOrdenar] = useState("");
 
-  const isLoading = useDataLoading(2000);
+  const isLoading = useDataLoading(1500);
 
   return (
     <BookListContainer>
@@ -161,35 +163,15 @@ function Catalogo({ titulo, lista }) {
 
       <Row>
         {isLoading
-          ? lista.map((livro) => (
-              <SkeletonBook key={livro.id}>
+          ? lista.map((livro, index) => (
+              <SkeletonBook key={index}>
                 <SkeletonImage variant="rect" width={150} height={185} />
                 <SkeletonTitle variant="text" />
                 <SkeletonTitle variant="text" />
               </SkeletonBook>
             ))
-          : lista.map((livro) => (
-              <Book key={livro.id}>
-                <Categoria categoria={livro.categoria}>
-                  <p>{livro.categoria}</p>
-                </Categoria>
-                <BookImage src={livro.image} alt="Livro 1" />
-                <AutorItem>por {livro.autor}</AutorItem>
-                <TituloItem>{livro.titulo}</TituloItem>
-              </Book>
-            ))}
-      </Row>
-      <Row>
-        {isLoading
-          ? lista.map((livro) => (
-              <SkeletonBook key={livro.id}>
-                <SkeletonImage variant="rect" width={150} height={185} />
-                <SkeletonTitle variant="text" />
-                <SkeletonTitle variant="text" />
-              </SkeletonBook>
-            ))
-          : lista.map((livro) => (
-              <Book key={livro.id}>
+          : lista.map((livro, index) => (
+              <Book key={index}>
                 <Categoria categoria={livro.categoria}>
                   <p>{livro.categoria}</p>
                 </Categoria>

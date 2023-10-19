@@ -13,6 +13,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20em;
 `;
 
 const Space = styled.div`
@@ -34,6 +35,9 @@ const Titulo = styled.h1`
 const HistoricoContainer = styled.div`
   margin-top: 20px;
   margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 `;
 
 const Card = styled.div`
@@ -136,52 +140,54 @@ const Biblioteca = () => {
               <SecaoContainer>
                 <TituloSecao>Lendo</TituloSecao>
                 <CardContainer>
-                    {userEncontrado.lendo.map((livro, index) => (
-                      <Card key={index}>
-                        <Box
-                          sx={{
-                            display: "flex",
-                          }}
-                        >
-                          <SubTitulo>{livro.titulo}</SubTitulo>
-                          <ClearIcon
-                            sx={{
-                              backgroundColor: "red",
-                              color: "white",
-                              borderRadius: "12px",
-                              display: "flex",
-                              alignSelf: "flex-start",
-                              justifyContent: "center",
-                            }}
-                          />
-                        </Box>
-                        <Button>Acessar</Button>
-                      </Card>
-                    ))}
-                  </CardContainer>
-              </SecaoContainer>
-            ) : (
-              ""
-            )}
-
-            {userEncontrado.lido ? (
-              <SecaoContainer>
-                <TituloSecao>Lido</TituloSecao>
-                <CardContainer>
-                  {userEncontrado.lido.map((livro, index) => (
-                    <Card lido key={index}>
+                  {userEncontrado.lendo.map((livro, index) => (
+                    <Card key={index}>
                       <Box
                         sx={{
                           display: "flex",
                         }}
                       >
-                        <SubTitulo lido>{livro.titulo}</SubTitulo>
+                        <SubTitulo>{livro.titulo}</SubTitulo>
+                        <ClearIcon
+                          sx={{
+                            backgroundColor: "red",
+                            color: "white",
+                            borderRadius: "12px",
+                            display: "flex",
+                            alignSelf: "flex-start",
+                            justifyContent: "center",
+                          }}
+                        />
                       </Box>
                       <Button>Acessar</Button>
                     </Card>
                   ))}
                 </CardContainer>
               </SecaoContainer>
+            ) : (
+              ""
+            )}
+
+            {userEncontrado.lido ? (
+              <>
+                <SecaoContainer>
+                  <TituloSecao>Lido</TituloSecao>
+                  <CardContainer>
+                    {userEncontrado.lido.map((livro, index) => (
+                      <Card lido key={index}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                          }}
+                        >
+                          <SubTitulo lido>{livro.titulo}</SubTitulo>
+                        </Box>
+                        <Button>Acessar</Button>
+                      </Card>
+                    ))}
+                  </CardContainer>
+                </SecaoContainer>
+              </>
             ) : (
               ""
             )}

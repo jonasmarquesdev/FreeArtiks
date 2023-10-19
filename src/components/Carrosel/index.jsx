@@ -16,8 +16,8 @@ const Book = styled.div`
 `;
 
 const BookImage = styled.img`
-  max-width: 200px;
-  height: auto;
+  max-width: 150px;
+  height: 185px;
 `;
 
 const Row = styled.div`
@@ -65,7 +65,7 @@ const SkeletonTitle = styled(Skeleton)`
 `;
 
 function BookList({ titulo, lista }) {
-  const isLoading = useDataLoading(2000);
+  const isLoading = useDataLoading(1500);
 
   return (
     <BookListContainer>
@@ -75,15 +75,15 @@ function BookList({ titulo, lista }) {
       </TituloContainer>
       <Row>
         {isLoading
-          ? lista.map((livro) => (
-              <SkeletonBook key={livro.id}>
+          ? lista.slice(0, 6).map((livro, index) => (
+              <SkeletonBook key={index}>
                 <SkeletonImage variant="rect" width={150} height={185} />
                 <SkeletonTitle variant="text" />
               </SkeletonBook>
             ))
-          : lista.map((livro) => (
-              <Book key={livro.id}>
-                <BookImage src={livro.image} alt="Livro 1" />
+          : lista.slice(0, 6).map((livro, index) => (
+              <Book key={index}>
+                <BookImage src={livro.image} alt={livro.titulo} />
                 <TituloItem>{livro.titulo}</TituloItem>
               </Book>
             ))}
