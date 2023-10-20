@@ -4,7 +4,7 @@ import { Label, Option, Select } from "../CampoTexto";
 import { useState } from "react";
 import { Box, Skeleton } from "@mui/material";
 import useDataLoading from "../../context/useDataLoading";
-// import { Button } from "@mui/material";
+import { useLivro } from "../../context/ProductContext";
 
 const BookListContainer = styled.div`
   display: flex;
@@ -113,9 +113,11 @@ const SkeletonTitle = styled(Skeleton)`
   max-width: 160px;
 `;
 
-function Catalogo({ titulo, lista }) {
+function Catalogo({ titulo }) {
   const [filtro, setFiltro] = useState("");
   const [ordenar, setOrdenar] = useState("");
+
+  const { livros } = useLivro();
 
   const isLoading = useDataLoading(1500);
 
@@ -163,14 +165,14 @@ function Catalogo({ titulo, lista }) {
 
       <Row>
         {isLoading
-          ? lista.map((livro, index) => (
+          ? livros.map((livro, index) => (
               <SkeletonBook key={index}>
                 <SkeletonImage variant="rect" width={150} height={185} />
                 <SkeletonTitle variant="text" />
                 <SkeletonTitle variant="text" />
               </SkeletonBook>
             ))
-          : lista.map((livro, index) => (
+          : livros.map((livro, index) => (
               <Book key={index}>
                 <Categoria categoria={livro.categoria}>
                   <p>{livro.categoria}</p>

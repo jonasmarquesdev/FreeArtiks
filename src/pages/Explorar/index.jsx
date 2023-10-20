@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useLivro } from "../../context/ProductContext";
 import Catalogo from "../../components/Catalogo";
 import { motion } from "framer-motion";
 
@@ -16,7 +15,6 @@ const Space = styled.div`
 `;
 
 const Explorar = () => {
-  const { livros } = useLivro();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,7 +24,7 @@ const Explorar = () => {
     >
       <DashboardContainer>
         <Space />
-        <Catalogo titulo="Catálogo" lista={livros} />
+        <Catalogo titulo="Catálogo" />
         <Space />
       </DashboardContainer>
     </motion.div>
