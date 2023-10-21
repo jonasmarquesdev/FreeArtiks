@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { Button, Skeleton } from "@mui/material";
 import useDataLoading from "../../context/useDataLoading";
+import { useLivro } from "../../context/ProductContext";
 
 const BookListContainer = styled.div`
   display: flex;
@@ -64,8 +65,9 @@ const SkeletonTitle = styled(Skeleton)`
   max-width: 160px;
 `;
 
-function BookList({ titulo, lista }) {
+function BookList({ titulo }) {
   const isLoading = useDataLoading(1500);
+  const { livros } = useLivro();
 
   return (
     <BookListContainer>
@@ -75,13 +77,13 @@ function BookList({ titulo, lista }) {
       </TituloContainer>
       <Row>
         {isLoading
-          ? lista.slice(0, 6).map((livro, index) => (
+          ? livros.slice(0, 6).map((livro, index) => (
               <SkeletonBook key={index}>
                 <SkeletonImage variant="rect" width={150} height={185} />
                 <SkeletonTitle variant="text" />
               </SkeletonBook>
             ))
-          : lista.slice(0, 6).map((livro, index) => (
+          : livros.slice(0, 6).map((livro, index) => (
               <Book key={index}>
                 <BookImage src={livro.image} alt={livro.titulo} />
                 <TituloItem>{livro.titulo}</TituloItem>
