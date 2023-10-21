@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import Banner from "./Banner";
 import BookList from "../../components/Carrosel";
-import { useArtigo, useLivro } from "../../context/ProductContext";
 import { motion } from "framer-motion";
+import useDataLoading from "../../context/useDataLoading";
+import { ArtigoProvider, LivroProvider } from "../../context/ProductContext";
+import FooterPersonalizado from "../../components/Footer";
+import Loading from "../LoadingPage";
+import LayoutContainer from "../../components/LayoutContainer";
+import Navegacao from "../../components/Navegacao";
 
 const DashboardContainer = styled.div`
   width: 1200px;
@@ -17,22 +22,36 @@ const Space = styled.div`
 `;
 
 const Dashboard = () => {
-  const { livros } = useLivro();
-  const { artigos } = useArtigo();
+  const isLoading = useDataLoading(3000);
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <DashboardContainer>
-        <Banner />
-        <BookList titulo="Livros mais acessados" lista={livros} />
-        <BookList titulo="Artigos mais acessados" lista={artigos} />
-        <Space />
-      </DashboardContainer>
-    </motion.div>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <LivroProvider>
+          <ArtigoProvider>
+            <Navegacao />
+            <LayoutContainer>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <DashboardContainer>
+                  <Banner />
+                  <BookList titulo="Livros mais acessados" />
+                  <BookList titulo="Artigos mais acessados" />
+                  <Space />
+                </DashboardContainer>
+              </motion.div>
+            </LayoutContainer>
+            <FooterPersonalizado />
+          </ArtigoProvider>
+        </LivroProvider>
+      )}
+    </>
   );
 };
 

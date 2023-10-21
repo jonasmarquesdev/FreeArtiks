@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     min-width: 393px;
     width: 100%;
+    background-color: var(--background-default);
   }
 
   :root {

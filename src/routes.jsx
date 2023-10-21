@@ -23,8 +23,8 @@ export default function AppRouter() {
       >
         <Router>
           <Routes>
-            <Route path="/" element={<PaginaPadrao />}>
-              <Route index element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
+            <Route element={<PaginaPadrao />}>
               <Route path="/dashboard/user/profile" element={<Profile />} />
               <Route
                 path="/dashboard/user/biblioteca"
