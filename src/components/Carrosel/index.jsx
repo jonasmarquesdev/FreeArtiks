@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Button, Skeleton } from "@mui/material";
 import useDataLoading from "../../context/useDataLoading";
 import { useLivro } from "../../context/ProductContext";
+import axios from "axios";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const BookListContainer = styled.div`
   display: flex;
@@ -31,6 +34,9 @@ const Row = styled.div`
 const Titulo = styled.h2`
   color: var(--preto);
   font-weight: 600;
+  font-size: ${(props) => (
+    props.pequeno ? "1.1em" :"1.5em"
+  )};
 `;
 
 const TituloItem = styled.p`
@@ -65,14 +71,30 @@ const SkeletonTitle = styled(Skeleton)`
   max-width: 160px;
 `;
 
-function BookList({ titulo }) {
+const LinkEstilizado = styled(Link)`
+  text-decoration: none;
+`;
+
+function BookList({ titulo, pequeno, skip = 0, cut = 6 }) {
   const isLoading = useDataLoading(1500);
-  const { livros } = useLivro();
+  const { livros, setLivros, ApiBaseUrl } = useLivro();
+
+  useEffect(() => {
+    // Realize a solicitação à API aqui
+    axios.get(`${ApiBaseUrl}`)
+      .then(response => {
+        // Atualize o estado com os dados da API
+        setLivros(response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar livros da API', error);
+      });
+  },[])
 
   return (
     <BookListContainer>
       <TituloContainer>
-        <Titulo>{titulo}</Titulo>
+        <Titulo pequeno={pequeno}>{titulo}</Titulo>
         <Button sx={{ color: "var(--cinza-escuro)" }}>ver mais</Button>
       </TituloContainer>
       <Row>
@@ -83,11 +105,13 @@ function BookList({ titulo }) {
                 <SkeletonTitle variant="text" />
               </SkeletonBook>
             ))
-          : livros.slice(0, 6).map((livro, index) => (
-              <Book key={index}>
-                <BookImage src={livro.image} alt={livro.titulo} />
-                <TituloItem>{livro.titulo}</TituloItem>
-              </Book>
+          : livros.slice(skip, cut).map((livro, index) => (
+              <LinkEstilizado to={`/livros/${livro.id}`} key={index}>
+                <Book>
+                  <BookImage src={livro.image} alt={livro.titulo} />
+                  <TituloItem>{livro.titulo}</TituloItem>
+                </Book>
+              </LinkEstilizado>
             ))}
       </Row>
     </BookListContainer>

@@ -10,6 +10,7 @@ import { UserProvider } from "./context/UserContext";
 import NotFound404 from "./pages/404";
 import Biblioteca from "./pages/biblioteca";
 import Explorar from "./pages/Explorar";
+import DetalhesLivro from "./pages/DetalhesLivro";
 
 export default function AppRouter() {
   return (
@@ -31,6 +32,7 @@ export default function AppRouter() {
                 element={<Biblioteca />}
               />
               <Route path="/explorar" element={<Explorar />} />
+              <Route path="/livros/:id" element={<DetalhesLivro />} />
             </Route>
             <Route element={<PaginaLoginForm />}>
               <Route path="/auth/login" element={<Login />} />

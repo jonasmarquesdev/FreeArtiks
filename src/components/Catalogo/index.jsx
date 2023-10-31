@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { Label, Option, Select } from "../CampoTexto";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Skeleton } from "@mui/material";
 import useDataLoading from "../../context/useDataLoading";
 import { useLivro } from "../../context/ProductContext";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const BookListContainer = styled.div`
   display: flex;
@@ -113,13 +115,42 @@ const SkeletonTitle = styled(Skeleton)`
   max-width: 160px;
 `;
 
-function Catalogo({ titulo }) {
-  const [filtro, setFiltro] = useState("");
-  const [ordenar, setOrdenar] = useState("");
+const LinkEstilizado = styled(Link)`
+  text-decoration: none;
+`;
 
-  const { livros } = useLivro();
+function Catalogo({ titulo }) {
+  // const [filtro, setFiltro] = useState("");
+  const [ordenarTag, setOrdenarTag] = useState("");
+  const [filtroTipo, setFiltroTipo] = useState("");
+
+  const [livrosOrdenadosCategoria, setLivrosOrdenadosCategoria] = useState([]);
+
+  const { livros, setLivros, ApiBaseUrl } = useLivro();
 
   const isLoading = useDataLoading(1500);
+
+  useEffect(() => {
+    // Realize a solicitação à API aqui
+    axios
+      .get(`${ApiBaseUrl}`)
+      .then((response) => {
+        // Atualize o estado com os dados da API
+        setLivros(response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar livros da API", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (ordenarTag) {
+      const livrosFiltrados = livros.filter((livro) => livro.tag === ordenarTag);
+      setLivrosOrdenadosCategoria(livrosFiltrados);
+    } else {
+      setLivrosOrdenadosCategoria(livros);
+    }
+  }, [ordenarTag, livros]);
 
   return (
     <BookListContainer>
@@ -134,15 +165,15 @@ function Catalogo({ titulo }) {
             flexDirection: "column",
           }}
         >
-          <Label htmlFor="ocupacao">Ordenar por:</Label>
+          <Label htmlFor="ocupacao">Filtrar por:</Label>
           <SelectComSombra
-            value={ordenar}
-            onChange={(e) => setOrdenar(e.target.value)}
+            value={ordenarTag}
+            onChange={(e) => setOrdenarTag(e.target.value)}
           >
-            <Option value="">Selecione a ordem</Option>
-            <Option value="introdutorio">Introdutório</Option>
-            <Option value="importante">Importante</Option>
-            <Option value="recomendado">Recomendado</Option>
+            <Option value="">Selecione a categoria</Option>
+            <Option value="1">Introdutório</Option>
+            <Option value="2">Importante</Option>
+            <Option value="3">Recomendado</Option>
           </SelectComSombra>
         </Box>
         <Box
@@ -153,10 +184,10 @@ function Catalogo({ titulo }) {
         >
           <Label htmlFor="ocupacao">Filtrar por:</Label>
           <SelectComSombra
-            value={filtro}
-            onChange={(e) => setFiltro(e.target.value)}
+            value={filtroTipo}
+            onChange={(e) => setFiltroTipo(e.target.value)}
           >
-            <Option value="">Selecione o tipo de item</Option>
+            <Option value="">Selecione o tipo</Option>
             <Option value="livro">Livro</Option>
             <Option value="artigo">Artigo</Option>
           </SelectComSombra>
@@ -165,22 +196,24 @@ function Catalogo({ titulo }) {
 
       <Row>
         {isLoading
-          ? livros.map((livro, index) => (
+          ? livrosOrdenadosCategoria.map((livro, index) => (
               <SkeletonBook key={index}>
                 <SkeletonImage variant="rect" width={150} height={185} />
                 <SkeletonTitle variant="text" />
                 <SkeletonTitle variant="text" />
               </SkeletonBook>
             ))
-          : livros.map((livro, index) => (
-              <Book key={index}>
-                <Categoria categoria={livro.categoria}>
-                  <p>{livro.categoria}</p>
-                </Categoria>
-                <BookImage src={livro.image} alt="Livro 1" />
-                <AutorItem>por {livro.autor}</AutorItem>
-                <TituloItem>{livro.titulo}</TituloItem>
-              </Book>
+          : livrosOrdenadosCategoria.map((livro, index) => (
+              <LinkEstilizado to={`/livros/${livro.id}`} key={index}>
+                <Book>
+                  <Categoria categoria={livro.categoria}>
+                    <p>{livro.categoria}</p>
+                  </Categoria>
+                  <BookImage src={livro.image} alt="Livro 1" />
+                  <AutorItem>por {livro.autor}</AutorItem>
+                  <TituloItem>{livro.titulo}</TituloItem>
+                </Book>
+              </LinkEstilizado>
             ))}
       </Row>
     </BookListContainer>
