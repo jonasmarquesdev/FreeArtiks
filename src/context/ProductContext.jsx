@@ -12,7 +12,7 @@ export function LivroProvider({ children }) {
   const livrosCadastrados = [];
 
   const [livros, setLivros] = useState(livrosCadastrados);
-  const [ApiBaseUrl, setAPIurl] = useState("https://api-livros-v2.vercel.app/livros");
+  const [ApiBaseUrl, setAPIurl] = useState("https://api-livros-v3.vercel.app/livros");
 
   return (
     <LivroContext.Provider value={{ livros, setLivros, ApiBaseUrl }}>
