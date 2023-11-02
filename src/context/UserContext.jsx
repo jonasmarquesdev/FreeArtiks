@@ -71,6 +71,7 @@ export function UserProvider({ children }) {
         Logout,
         Login,
         userEncontrado,
+        setUserEncontrado
       }}
     >
       {children}

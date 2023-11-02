@@ -69,7 +69,7 @@ const ButtonFlexSecund = styled(ButtonFlex)`
 
 const DetalhesLivro = () => {
   const { ApiBaseUrl } = useLivro();
-  const { userEncontrado } = useUser();
+  const { userEncontrado, setUserEncontrado } = useUser();
 
   const { id } = useParams(); // Obtém o parâmetro id da URL
   const livroId = parseInt(id, 10); // Certifique-se de que seja um número inteiro
@@ -88,6 +88,11 @@ const DetalhesLivro = () => {
         console.error("Erro ao buscar livros da API", error);
       });
   }, [ApiBaseUrl, livroId]);
+
+  useEffect(() => {
+    const storedUserEncontrado = localStorage.getItem("userEncontrado");
+    setUserEncontrado(JSON.parse(storedUserEncontrado));
+  }, [])
 
   return (
     <>
