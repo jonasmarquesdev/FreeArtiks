@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import { useLivro } from "../../context/ProductContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import StarIcon from '@mui/icons-material/Star';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import StarIcon from "@mui/icons-material/Star";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import { useUser } from "../../context/UserContext";
 
 const Container = styled.div`
   width: 1200px;
@@ -68,6 +69,7 @@ const ButtonFlexSecund = styled(ButtonFlex)`
 
 const DetalhesLivro = () => {
   const { ApiBaseUrl } = useLivro();
+  const { userEncontrado } = useUser();
 
   const { id } = useParams(); // Obtém o parâmetro id da URL
   const livroId = parseInt(id, 10); // Certifique-se de que seja um número inteiro
@@ -100,18 +102,23 @@ const DetalhesLivro = () => {
                 <h2>{livro.titulo}</h2>
                 <h4>por {livro.autor}</h4>
                 <h4>Categoria: {livro.categoria}</h4>
-                <p>
-                  {livro.descricao}
-                </p>
+                <p>{livro.descricao}</p>
                 <AcoesContainer>
                   <ButtonFlex>
                     <AutoStoriesIcon />
                     <div>Ler</div>
                   </ButtonFlex>
-                  <ButtonFlexSecund>
-                    <StarIcon />
-                    <div>Recomendar</div>
-                  </ButtonFlexSecund>
+
+                  {userEncontrado.ocupacao === "Professor" ? (
+                    <>
+                      <ButtonFlexSecund>
+                        <StarIcon />
+                        <div>Recomendar</div>
+                      </ButtonFlexSecund>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </AcoesContainer>
               </ColunaCentralizada>
             </>
