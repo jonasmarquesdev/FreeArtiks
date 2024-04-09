@@ -6,6 +6,7 @@ import { useLivro } from "../../context/ProductContext";
 import axios from "axios";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BookListContainer = styled.div`
   display: flex;
@@ -78,6 +79,7 @@ const LinkEstilizado = styled(Link)`
 function BookList({ titulo, pequeno, skip = 0, cut = 6 }) {
   const isLoading = useDataLoading(1500);
   const { livros, setLivros, ApiBaseUrl } = useLivro();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Realize a solicitação à API aqui
@@ -89,13 +91,17 @@ function BookList({ titulo, pequeno, skip = 0, cut = 6 }) {
       .catch(error => {
         console.error('Erro ao buscar livros da API', error);
       });
-  },[])
+  },[]);
+
+  const navigateToExplorar = () => {
+    navigate("/explorar");
+  };
 
   return (
     <BookListContainer>
       <TituloContainer>
         <Titulo pequeno={pequeno}>{titulo}</Titulo>
-        <Button sx={{ color: "var(--cinza-escuro)" }}>ver mais</Button>
+        <Button onClick={navigateToExplorar} sx={{ color: "var(--cinza-escuro)" }}>ver mais</Button>
       </TituloContainer>
       <Row>
         {isLoading
